@@ -1,0 +1,3 @@
+rootProject.name = 'tendata-mdcs'
+
+include 'min-zone-webapp', 'min-zone-manger', 'min-zone-admin-manager'

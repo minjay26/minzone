@@ -27,6 +27,14 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-orm', version: '4.1.9.RELEASE'
     compile group: 'org.springframework', name: 'spring-expression', version: '4.2.7.RELEASE'
     compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.9.4.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: '4.1.1.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.1.1.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.1.1.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '4.1.1.RELEASE'
+    compile group: 'org.hibernate', name: 'hibernate-validator', version: '5.2.4.Final'
+    compile group: 'org.springframework', name: 'spring-context-support', version: '4.3.1.RELEASE'
+    compile group: 'org.hibernate', name: 'hibernate-annotations', version: '3.5.6-Final'
+    compile group: 'hibernate', name: 'hibernate-entitymanager', version: '3.4.0.GA', ext: 'pom'
     
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }

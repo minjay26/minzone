@@ -1,55 +1,45 @@
-/**
- * 
- */
-$(document).ready(function(){ 
-			$("#menu li").each(
-					function(index) {
-						$(this).click(
-								function() {
-									$("#menu li.tabFocus").removeClass(
-											"tabFocus");
-									$(this).addClass("tabFocus");
-									$("#content-detail li:eq(" + index + ")").show()
-											.siblings().hide();
-								});
-					});
-			
-			$("#add").click(function(){
-				//通过异步请求获取add的局部视图
-				$.get("department-add", function(r){
-					  $("#others").empty().html(r);
-				});
-			});
+$(function(){
+	
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+			resizeType : 0,
+			 height:"10px",
+			 width:"400px",
+			allowPreviewEmoticons : false,
+			allowImageUpload : false,
+			items : [
+				 
+				 'emoticons', 'image', 'link']						   
 		});	
-		$(".modify").each(function(i){
-			$(this).click(function(){
-				$.get($(this).attr("url"),function(r){
-					$("#others").empty().html(r);
-				});
-			});
-		});
+		editor.sync();
 		
-		$(".remove").each(function(i){
-			$(this).click(function(){
-				var cur = $(this);
-				if(window.confirm("确定要删除吗？")){
-					$.get($(this).attr("url"), function(r){
-						var obj = window.eval("(" + r + ")");						
-						alert(obj.message);					
-						$(cur).parents("tr").remove();
-						cur = null;
-					});
+	});
+	
+	
+	$("#submit").click(function(){		
+		 var content= editor.html();
+		//var content= $("#editor_id2").val();
+			alert(content);
+			$.ajax({
+				type:"POST",
+				url:"user_blog/submit",
+				data:content,
+				success:function(e){
+					alert(e);
 				}
-			});
-		});
-		$(".department_employees").each(function(i){
-			$(this).click(function(){
-				$.get($(this).attr("url"),function(r){
-					$("#others").empty().html(r);
-				});
-			});
-		});
-		
-		
-		
-		
+				
+			})
+	})
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+})

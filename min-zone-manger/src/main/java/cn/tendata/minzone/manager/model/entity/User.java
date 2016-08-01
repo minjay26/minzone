@@ -2,6 +2,7 @@ package cn.tendata.minzone.manager.model.entity;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,6 +36,18 @@ public class User implements UserDetails{
 	private String trueName;
 	
 	private String phone;
+
+	private String password;
+	
+	private String gender;	
+	
+	private String address;
+	
+	private int age;
+	
+	@CreatedDate
+	private Date registerTime;
+	
 	
 	public String getTrueName() {
 		return trueName;
@@ -50,14 +64,6 @@ public class User implements UserDetails{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	private String password;
-	
-	private String gender;	
-	
-	private String address;
-	
-	private int age;
 	
 	@OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="id",unique=false)

@@ -38,6 +38,6 @@ public class Security extends WebSecurityConfigurerAdapter{
     	 .and()
     	 .logout().deleteCookies().invalidateHttpSession(true).permitAll();
     	 http.sessionManagement()/*.sessionAuthenticationErrorUrl("/invalidSession")*/.maximumSessions(1);
-    	  
+    	  http.headers().frameOptions().sameOrigin().httpStrictTransportSecurity().disable();
     }
 }

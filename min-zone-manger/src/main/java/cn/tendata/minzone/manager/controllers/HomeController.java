@@ -13,7 +13,7 @@ import cn.tendata.minzone.manager.model.entity.User;
 public class HomeController {
     
 	@RequestMapping(method=RequestMethod.GET)
-	public String home(ModelMap map,@CurrentUser User user){
+	public String home(ModelMap map,final @CurrentUser User user){
 		map.addAttribute("user", user);
 		return "/home";
 	}

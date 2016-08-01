@@ -35,6 +35,9 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-context-support', version: '4.3.1.RELEASE'
     compile group: 'org.hibernate', name: 'hibernate-annotations', version: '3.5.6-Final'
     compile group: 'hibernate', name: 'hibernate-entitymanager', version: '3.4.0.GA', ext: 'pom'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.2'
+    compile group: 'org.apache.clerezza.ext', name: 'org.json.simple', version: '0.4'
     
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }

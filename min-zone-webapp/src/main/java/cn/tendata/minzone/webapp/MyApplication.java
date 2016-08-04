@@ -15,7 +15,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import cn.tendata.minzone.manager.data.domain.User;
-import cn.tendata.minzone.manager.data.domain.UserAuditorAware;
+
 
 
 
@@ -41,10 +41,10 @@ public class MyApplication extends SpringBootServletInitializer{
      @EnableJpaAuditing
      @EntityScan(basePackages = "cn.tendata.minzone.manager.data.domain")
      static class JpaConfig {
-       @Bean
-   	  public AuditorAware<User> auditorProvider() {
-   	    return new UserAuditorAware();
-   	  }
+//       @Bean
+//   	  public AuditorAware<User> auditorProvider() {
+//   	    return new UserAuditorAware();
+//   	  }
     	 
      }
      

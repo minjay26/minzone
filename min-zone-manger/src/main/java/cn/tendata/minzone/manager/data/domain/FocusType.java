@@ -1,8 +1,11 @@
 package cn.tendata.minzone.manager.data.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 public class FocusType {

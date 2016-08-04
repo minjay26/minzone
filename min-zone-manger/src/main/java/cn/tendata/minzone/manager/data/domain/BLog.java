@@ -25,7 +25,6 @@ public class Blog extends AbstractEntityAuditable<Integer>{
 	@GeneratedValue
 	private Integer bId;
 	
-	@CreatedBy
 	@OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="uId",unique=false)
 	private User blogUser;

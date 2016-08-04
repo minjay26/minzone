@@ -46,7 +46,7 @@ public class BlogController implements ServletContextAware{
 	@ResponseBody
 	public String submit(@RequestParam("content") String content,final @CurrentUser  User user) {
         Blog blog=new Blog();
-        System.out.println(blog.getCreatedDate());
+        blog.setBlogUser(user);
         blog.setContent(content);
 		this.blogService.addBlog(blog);
 		return "success";

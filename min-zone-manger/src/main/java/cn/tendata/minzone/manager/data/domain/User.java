@@ -1,8 +1,7 @@
-package cn.tendata.minzone.manager.model.entity;
+package cn.tendata.minzone.manager.data.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,16 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import org.springframework.data.annotation.CreatedDate;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
-
 @Entity
-public class User implements UserDetails{
-     
+public class User extends AbstractEntityAuditable<Integer> implements UserDetails {
+
 	/**
 	 * 
 	 */
@@ -30,25 +27,23 @@ public class User implements UserDetails{
 	@Id
 	@GeneratedValue
 	private int uId;
-	
+
 	private String username;
-	
+
 	private String trueName;
-	
+
 	private String phone;
 
 	private String password;
-	
-	private String gender;	
-	
+
+	private String gender;
+
 	private String address;
-	
+
 	private int age;
+
 	
-	@CreatedDate
-	private Date registerTime;
-	
-	
+
 	public String getTrueName() {
 		return trueName;
 	}
@@ -64,16 +59,16 @@ public class User implements UserDetails{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
-	@OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="id",unique=false)
-    private Role role;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id", unique = false)
+	private Role role;
 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> authorities=new ArrayList<>();
- 		Role role=this.getRole();
- 		authorities.add(new SimpleGrantedAuthority(role.getRoleDescribe()));
- 		return authorities;
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		Role role = this.getRole();
+		authorities.add(new SimpleGrantedAuthority(role.getRoleDescribe()));
+		return authorities;
 	}
 
 	public int getuId() {
@@ -151,7 +146,5 @@ public class User implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
-   
 
-	
 }

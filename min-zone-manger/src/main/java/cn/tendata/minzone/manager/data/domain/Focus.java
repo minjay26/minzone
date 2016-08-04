@@ -1,4 +1,4 @@
-package cn.tendata.minzone.manager.model.entity;
+package cn.tendata.minzone.manager.data.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Focus {
+public class Focus extends AbstractEntityAuditable<Integer>{
     
 	@Id
 	@GeneratedValue

@@ -29,13 +29,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 
 import cn.tendata.minzone.manager.bind.annotation.CurrentUser;
-import cn.tendata.minzone.manager.model.entity.Blog;
-import cn.tendata.minzone.manager.model.entity.User;
+import cn.tendata.minzone.manager.data.domain.Blog;
+import cn.tendata.minzone.manager.data.domain.User;
 import cn.tendata.minzone.manager.service.BlogService;
 
 @Controller
 @RequestMapping("/user_blog")
-public class BLogController implements ServletContextAware{
+public class BlogController implements ServletContextAware{
 	
 	private ServletContext servletContext;
 	
@@ -46,6 +46,7 @@ public class BLogController implements ServletContextAware{
 	@ResponseBody
 	public String submit(@RequestParam("content") String content,final @CurrentUser  User user) {
         Blog blog=new Blog();
+        System.out.println(blog.getCreatedDate());
         blog.setContent(content);
 		this.blogService.addBlog(blog);
 		return "success";
@@ -164,7 +165,6 @@ public class BLogController implements ServletContextAware{
 		return "";
 	}
 
-	@Override
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext=servletContext;
 		

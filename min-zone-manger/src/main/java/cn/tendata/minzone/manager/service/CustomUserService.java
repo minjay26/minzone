@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import cn.tendata.minzone.manager.model.entity.User;
+import cn.tendata.minzone.manager.data.domain.User;
 import cn.tendata.minzone.manager.repository.UserRepository;
 
 public class CustomUserService implements UserDetailsService{

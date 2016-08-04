@@ -6,11 +6,16 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.boot.orm.jpa.EntityScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import cn.tendata.minzone.manager.data.domain.User;
+import cn.tendata.minzone.manager.data.domain.UserAuditorAware;
 
 
 
@@ -34,8 +39,14 @@ public class MyApplication extends SpringBootServletInitializer{
      @EnableTransactionManagement
      @EnableJpaRepositories(basePackages = "cn.tendata.minzone.manager.repository")
      @EnableJpaAuditing
-     @EntityScan(basePackages = "cn.tendata.minzone.manager.model.entity")
-     static class JpaConfig {}
+     @EntityScan(basePackages = "cn.tendata.minzone.manager.data.domain")
+     static class JpaConfig {
+       @Bean
+   	  public AuditorAware<User> auditorProvider() {
+   	    return new UserAuditorAware();
+   	  }
+    	 
+     }
      
      @Configuration
      @ComponentScan(basePackages="cn.tendata.minzone.manager.service")

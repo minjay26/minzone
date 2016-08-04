@@ -1,11 +1,10 @@
-package cn.tendata.minzone.manager.service.impl;
+package cn.tendata.minzone.manager.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cn.tendata.minzone.manager.model.entity.User;
+import cn.tendata.minzone.manager.data.domain.User;
 import cn.tendata.minzone.manager.repository.UserRepository;
-import cn.tendata.minzone.manager.service.UserService;
 
 @Service
 public class UseServiceImpl implements UserService{

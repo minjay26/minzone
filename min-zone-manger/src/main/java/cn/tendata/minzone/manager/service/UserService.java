@@ -1,6 +1,6 @@
 package cn.tendata.minzone.manager.service;
 
-import cn.tendata.minzone.manager.model.entity.User;
+import cn.tendata.minzone.manager.data.domain.User;
 
 public interface UserService {
     

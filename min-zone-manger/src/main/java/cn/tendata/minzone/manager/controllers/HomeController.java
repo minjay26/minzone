@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.tendata.minzone.manager.bind.annotation.CurrentUser;
-import cn.tendata.minzone.manager.model.entity.User;
+import cn.tendata.minzone.manager.data.domain.User;
 
 @Controller
 @RequestMapping("/home")

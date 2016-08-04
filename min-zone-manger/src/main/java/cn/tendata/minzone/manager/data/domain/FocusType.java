@@ -1,4 +1,4 @@
-package cn.tendata.minzone.manager.model.entity;
+package cn.tendata.minzone.manager.data.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

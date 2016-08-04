@@ -1,12 +1,10 @@
-package cn.tendata.minzone.manager.model.entity;
-
-import java.util.Date;
+package cn.tendata.minzone.manager.data.domain;
 
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,11 +12,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-public class Blog {
+@EntityListeners(AuditingEntityListener.class)
+public class Blog extends AbstractEntityAuditable<Integer>{
     
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	private Integer bId;
@@ -29,10 +31,6 @@ public class Blog {
 	private User blogUser;
 	
 	private String content;
-	
-	@CreatedDate
-	private Date creatTime;
-	
 
 	private Integer commentCount;
 	
@@ -63,14 +61,6 @@ public class Blog {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public Date getCreatTime() {
-		return creatTime;
-	}
-
-	public void setCreatTime(Date creatTime) {
-		this.creatTime = creatTime;
 	}
 
 	public Integer getCommentCount() {

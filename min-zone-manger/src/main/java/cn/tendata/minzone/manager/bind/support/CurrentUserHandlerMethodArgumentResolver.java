@@ -12,7 +12,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import cn.tendata.minzone.manager.bind.annotation.CurrentUser;
-import cn.tendata.minzone.manager.model.entity.User;
+import cn.tendata.minzone.manager.data.domain.User;
 import cn.tendata.minzone.manager.service.UserService;
 
 public class CurrentUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver{

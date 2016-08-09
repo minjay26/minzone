@@ -28,6 +28,15 @@ public class Role {
 	public void setRoleDescribe(String roleDescribe) {
 		this.roleDescribe = roleDescribe;
 	}
+
+	public Role() {
+
+	}
+
+	public Role(int id, String roleDescribe) {
+		this.id = id;
+		this.roleDescribe = roleDescribe;
+	}
 	
 	
 }

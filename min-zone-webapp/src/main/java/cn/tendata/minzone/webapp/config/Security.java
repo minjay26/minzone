@@ -28,7 +28,7 @@ public class Security extends WebSecurityConfigurerAdapter{
 	 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	 http.csrf().disable().authorizeRequests()
+    	 http.csrf().disable().authorizeRequests().antMatchers("/user/**").permitAll()
     	 .anyRequest().authenticated()//所有需要经过认证登录后才能访问
     	 .and()
     	 .formLogin()

@@ -35,20 +35,12 @@ $(function(){
 	
 	$("#submit").click(function(){		
 		 var content= editor.html();
-		//var content= $("#editor_id2").val();
-			alert(content);
-//			$.post("user_blog/submit",{content:content},function(result){
-//					alert(result);
-//				}
-//				
-//			)
-			//debugger;
 			$.ajax({
 				type:"POST",
 				url:"user_blog/submit",
 				data:{content:content},				
 				success:function(result){
-					alert(result);
+					location.href ="/home";
 				},
 				error:function(XMLHttpRequest, textStatus, errorThrown){
 					

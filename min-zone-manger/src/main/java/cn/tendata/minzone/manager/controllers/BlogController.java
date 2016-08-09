@@ -38,9 +38,13 @@ import cn.tendata.minzone.manager.service.BlogService;
 public class BlogController implements ServletContextAware{
 	
 	private ServletContext servletContext;
+		
+	private final BlogService blogService;	
 	
 	@Autowired
-	private BlogService blogService;
+	public BlogController(BlogService blogService) {
+		this.blogService = blogService;
+	}
 
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	@ResponseBody

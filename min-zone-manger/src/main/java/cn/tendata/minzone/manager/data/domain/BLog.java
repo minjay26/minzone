@@ -3,6 +3,7 @@ package cn.tendata.minzone.manager.data.domain;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -30,9 +32,12 @@ public class Blog extends AbstractEntityAuditable<Integer>{
 	private User blogUser;
 	
 	private String content;
-
+    
+	
+	@Column(nullable=false,columnDefinition="default 0")
 	private Integer commentCount;
 	
+	@Column(nullable=false,columnDefinition="default 0")
 	private Integer favour;
 	
 	@OneToMany(cascade=CascadeType.ALL)

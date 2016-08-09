@@ -1,24 +1,24 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      >
  <head>
-  <title>Document</title>
-  <script src="js/jquery/jquery-1.11.3.min.js"></script>
-  <link rel="stylesheet" href="kindeditor/themes/default/default.css" />
-  <script charset="utf-8" src="kindeditor/kindeditor-all.js"></script>
-<script charset="utf-8" src="kindeditor/lang/zh-CN.js"></script>
-<script charset="utf-8" src="js/home.js"></script>
-  <link href="bootstrap/css/bootstrap.css" rel='stylesheet' type='text/css'/>
-  <link href="css/home.css" rel='stylesheet' type='text/css'/>
+  <title>个人中心</title>
+  <script th:src="@{js/jquery/jquery-1.11.3.min.js}"></script>
+  <link   th:href="@{kindeditor/themes/default/default.css}" />
+  <script  th:src="@{kindeditor/kindeditor-all.js}"></script>
+  <script  th:src="@{kindeditor/lang/zh-CN.js}"></script>
+  <script  th:src="@{js/home.js}"></script>
+  <link th:href="@{/bootstrap/css/bootstrap.css}" rel='stylesheet'/>
+  <link th:href="@{/css/home.css}" rel='stylesheet'/>
  </head>
  <body>
   <div class="container">
-    <div id="head">
+    <div id="head" th:fragment="home_head">
 	     <span></span>
 		   <nav class="navbar navbar-default">
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header" sytle="left:100px;">
+          <div class="navbar-header" style="left:100px;">
           <a class="navbar-brand" href="#">首页</a>
         	   <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
@@ -42,6 +42,9 @@
               <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true" >设置</span></a></li>
               <li>
                 <a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true" >消息</span></a>
+              </li>
+              <li>
+                <a href="/square"><span class="glyphicon glyphicon-flag" aria-hidden="true" >广场</span></a>
               </li>
             </ul>
           
@@ -75,18 +78,26 @@
                   </div>
                 </div>
                 <!-- 动态部分 -->
-                <div class="event_con">
-                    <p>
-                    【比赛结果】2:0！Team WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一
-                    </p>
-                    <p>【比赛结果】2:0！Team WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一
-                    </p>
-                    <p>【比赛结果】2:0！Team WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一
-                    </p>
-                    <p>【比赛结果】2:0！Team WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一
-                    </p>
-
+                <div class="event_con" th:if="${personBLogs.size()>0}" th:each="ele : ${personBLogs}">
+                     <div>
+                          <a href="#"><span th:text="${ele.blogUser.username}">模拟用户</span></a>
+                          <p th:utext="${ele.content}">今天我很嗨</p>                  
+                     </div>
+                    
+                     <div>
+                           <span th:text="${ele.createdDate}"></span>
+                                                              
+                           <a href="#">
+                                 <span class="glyphicon glyphicon-comment" aria-hidden="true" th:text="${ele.commentCount}" title="评论">10</span>                              
+                           </a>
+                                                                                
+                           <a href="#">
+                                 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" th:text="${ele.favour}" title="点赞">10</span>
+                           </a>
+                     </div> 
+                    <hr></hr>
                 </div>
+                <div class="no_content" th:if="${personBLogs.size()==0}">你还没有发布任何微博哦</div>
             </div>
             <!-- 右侧信息部分 -->
             <div class="col-md-3">
@@ -95,7 +106,7 @@
                     <div class="person-header">
                       <img  class="img-circle" alt="80x80" src="images/loginImages/huaidan.jpg" />
                     </div>
-                    <div class="name text-center">
+                    <div class="name text-center" th:text="${user.username}">
                         罗罗罗罗罗罗罗敏
                     </div>
                     <div class="row">

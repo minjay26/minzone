@@ -1,5 +1,7 @@
 package cn.tendata.minzone.manager.data.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -8,8 +10,10 @@ import javax.persistence.Id;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-public class FocusType {
-	
+public class FocusType implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
     private Integer ftId;

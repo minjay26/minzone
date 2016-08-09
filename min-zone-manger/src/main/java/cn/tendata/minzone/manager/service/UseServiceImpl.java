@@ -9,12 +9,24 @@ import cn.tendata.minzone.manager.repository.UserRepository;
 @Service
 public class UseServiceImpl implements UserService{
     
-	@Autowired
-	private UserRepository userRepository;
 	
+	private final UserRepository userRepository;
+		
+	@Autowired
+	public UseServiceImpl(UserRepository userRepository) {
+		super();
+		this.userRepository = userRepository;
+	}
+
 	@Override
 	public User findById(Integer id) {
 		return userRepository.findOne(id);
+	}
+
+	@Override
+	public void register(User user) {
+		
+		this.userRepository.save(user);
 	}
 
 }

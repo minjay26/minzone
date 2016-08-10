@@ -30,12 +30,14 @@ public class CurrentUserHandlerMethodArgumentResolver implements HandlerMethodAr
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		if (this.supportsParameter(parameter)) {
 			Principal principal=webRequest.getUserPrincipal();
-			User user=(User) ((Authentication)principal).getPrincipal();
-			if (user!=null) {
-				return userService.findById(user.getuId());
-			}
+			if (principal!=null) {
+				User user=(User) ((Authentication)principal).getPrincipal();
+				if (user!=null) {
+					return userService.findById(user.getuId());
+				}				
+			}					
 		}
-		return WebArgumentResolver.UNRESOLVED;
+		return null;
 	}
 
 }

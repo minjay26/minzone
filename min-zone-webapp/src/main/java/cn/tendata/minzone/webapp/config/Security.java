@@ -28,8 +28,8 @@ public class Security extends WebSecurityConfigurerAdapter{
 	 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	 http.csrf().disable().authorizeRequests().antMatchers("/user/**").permitAll()
-    	 .anyRequest().authenticated()//所有需要经过认证登录后才能访问
+    	 http.csrf().disable().authorizeRequests()//.antMatchers("/user/**").permitAll()
+    	 .anyRequest().permitAll()//.authenticated()//所有需要经过认证登录后才能访问
     	 .and()
     	 .formLogin()
     	 .loginPage("/login")//定制登录行为

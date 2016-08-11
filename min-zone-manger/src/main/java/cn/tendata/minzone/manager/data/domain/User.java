@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,9 +23,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @EntityListeners(AuditingEntityListener.class)
 public class User extends AbstractEntityAuditable<Integer> implements UserDetails {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -65,6 +64,10 @@ public class User extends AbstractEntityAuditable<Integer> implements UserDetail
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id", unique = false)
 	private Role role;
+	
+
+	@Column(nullable=true)
+	private VType type;
 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<>();
@@ -155,6 +158,14 @@ public class User extends AbstractEntityAuditable<Integer> implements UserDetail
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public VType getType() {
+		return type;
+	}
+
+	public void setType(VType type) {
+		this.type = type;
 	}
 	
 	

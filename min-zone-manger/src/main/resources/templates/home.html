@@ -4,9 +4,6 @@
  <head th:fragment="header">
  <meta charset="UTF-8"/>
   <script th:src="@{/js/jquery/jquery-1.11.3.min.js}"></script>
-  <script  th:src="@{/kindeditor/kindeditor-all.js}"></script>
-  <script  th:src="@{/kindeditor/lang/zh-CN.js}"></script>
-  <script  th:src="@{/js/home.js}"></script>
   <link   th:href="@{/kindeditor/themes/default/default.css}" />
   <link rel="stylesheet" th:href="@{\bootstrap\css\bootstrap.css}" />
   <link rel="stylesheet" th:href="@{\css\home.css}" />
@@ -19,7 +16,7 @@
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header" style="left:100px;">
-          <a class="navbar-brand" href="#">首页</a>
+          <a class="navbar-brand" href="/home">首页</a>
         	   <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                   <input type="text" class="form-control" placeholder="我来搜一搜"/>
@@ -149,4 +146,7 @@
   </div>
 
  </body>
+   <script  th:src="@{/kindeditor/kindeditor-all.js}"></script>
+  <script  th:src="@{/kindeditor/lang/zh-CN.js}"></script>
+    <script  th:src="@{/js/home.js}"></script>
 </html>

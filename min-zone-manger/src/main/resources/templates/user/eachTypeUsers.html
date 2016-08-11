@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{\css\home.css}" />
+<style>
+   .list li{
+      list-style:none;
+      height:20px;
+      float:left;
+      margin-right:20px;
+      word-break:break-all;
+      cursor:pointer;
+   }
+   
+   .list li:last-child{
+      margin-right:0px;
+   }
+</style>
+<script type="text/javascript">
+  $("li").each(function(i){
+	  $(this).click(function(){
+		  var uId=$(this).attr('id');
+		  window.location="/user/visit_user/"+uId;
+	  })
+  })
+
+</script>
+</head>
+<body>
+     <ul class="list">
+         <li th:each="ele : ${users}" th:text="${ele[1]}" th:id="${ele[0]}"></li>
+     </ul>
+</body>
+</html>

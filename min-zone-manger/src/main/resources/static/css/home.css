@@ -1,0 +1,43 @@
+@charset "utf-8";
+body {
+	font-family: "微软雅黑";
+}
+.content {
+	width: 100%;
+}
+.con_nav {
+	padding:0;
+}
+.speak {
+	margin-bottom:20px;
+}
+.person-info {
+	width: 100%;
+}
+.person-header {
+	width: 30%;
+	margin:0 auto;
+}
+.person-header img {
+	width: 100%;
+	height: auto;
+}
+.name {
+	width: 100%;
+	line-height: 30px;
+}
+.fans li a {
+	color:#333;
+}
+
+.fans li strong {
+	display: block;
+}
+.fans li {
+	width: 32%;
+}
+.bg-primary{
+	text-align:center;
+	height:50px;
+	font-size:23px;
+}

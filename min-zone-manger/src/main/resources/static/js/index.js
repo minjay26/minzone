@@ -6,7 +6,7 @@ $(function(){
 			
 			jumpPage:function(e){
 				var $Item = $(e.target).closest('li'),
-				    activeUrl = $Item.children('a').data('url'),
+				    activeUrl = $Item.children('a').data('url');
 				$.ajax({
 					url:activeUrl,
 					type:"get",

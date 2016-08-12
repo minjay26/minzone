@@ -32,8 +32,8 @@ public class BlogServiceImpl implements BlogService{
 
 	@Override
 	@Transactional(readOnly=true)
-	public List<Blog> getAll(User user) {
-		return this.blogRepository.findAllByBlogUser(user.getuId());
+	public List<Blog> getAll(User user,Integer beginSite,Integer size) {
+		return this.blogRepository.findAllByBlogUser(user.getuId(),beginSite,size);
 		
 	}
 	

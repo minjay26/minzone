@@ -11,19 +11,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.tendata.minzone.manager.data.domain.Blog;
 import cn.tendata.minzone.manager.data.domain.User;
 import cn.tendata.minzone.manager.data.domain.VType;
+import cn.tendata.minzone.manager.service.BlogService;
 import cn.tendata.minzone.manager.service.UserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	
-	private UserService userService;
+	private final UserService userService;
+	
+	private  final BlogService blogService;
 	
 	@Autowired
-	public UserController(UserService userService) {
+	public UserController(UserService userService,BlogService blogService) {
 		this.userService = userService;
+		this.blogService=blogService;
 	}
 
 	@RequestMapping(value="/register",method=RequestMethod.GET)
@@ -55,7 +60,9 @@ public class UserController {
 	
 	@RequestMapping("/visit_user/{uId}")
 	public String visitUser(@PathVariable("uId") User user,ModelMap map){
-		map.addAttribute("user", user);
+		//List<Blog> blogs=this.blogService.getAll(user);
+		map.addAttribute("user", user);	
+		//map.addAttribute("blogs", blogs);
 		return "/user/visit_user";
 	}
 }

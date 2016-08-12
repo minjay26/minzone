@@ -14,5 +14,5 @@ public interface BlogService {
 
 	void addBlog(Blog blog);
 	
-	List<Blog> getAll(User user);
+	List<Blog> getAll(User user,Integer beginSite,Integer size);
 }

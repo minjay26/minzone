@@ -1,152 +1,180 @@
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
- <head th:fragment="header">
- <meta charset="UTF-8"/>
-  <script th:src="@{/js/jquery/jquery-1.11.3.min.js}"></script>
-  <link   th:href="@{/kindeditor/themes/default/default.css}" />
-  <link rel="stylesheet" th:href="@{\bootstrap\css\bootstrap.css}" />
-  <link rel="stylesheet" th:href="@{\css\home.css}" />
- </head>
- <body>
-  <div class="container">
-    <div id="head" th:fragment="home_head">
-	     <span></span>
-		   <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header" style="left:100px;">
-          <a class="navbar-brand" href="/home">首页</a>
-        	   <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="我来搜一搜"/>
-                </div>
-                <button type="submit" class="btn btn-default">搜索</button>
-              </form>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            
-          </div>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+<meta charset="UTF-8" />
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+<meta name="_csrf_name" th:content="${_csrf.parameterName}"/>
+<script th:src="@{/js/jquery/jquery-1.11.3.min.js}"></script>
+<link th:href="@{/kindeditor/themes/default/default.css}" />
+<link rel="stylesheet" th:href="@{\bootstrap\css\bootstrap.css}" />
+<link rel="stylesheet" th:href="@{\css\home.css}" />
+</head>
+<body>
+	<div class="container">
+		<div id="head" th:fragment="home_head">
+			<span></span>
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header" style="left: 100px;">
+						<a class="navbar-brand" href="/home/1">首页</a>
+						<form class="navbar-form navbar-left" role="search">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="我来搜一搜" />
+							</div>
+							<button type="submit" class="btn btn-default">搜索</button>
+						</form>
+						<button type="button" class="navbar-toggle collapsed"
+							data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-             
-             <!-- 用户登陆就显示当前登陆用户 -->
-              <li  th:if="${user}"> <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true" th:text="${user.username}">模拟用户</span></a></li>
-              
-              <!-- 用户未登陆就显示登陆-->
-              <li  th:if="${user==null}"> <a href="/login"><span class="glyphicon glyphicon-user" aria-hidden="true">登陆</span></a></li>
-              
-              <li> <a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true">退出</span></a></li>
-              
-              <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true" >设置</span></a></li>
-              <li>
-                <a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true" >消息</span></a>
-              </li>
-              <li>
-                <a href="/square"><span class="glyphicon glyphicon-flag" aria-hidden="true" >广场</span></a>
-              </li>
-            </ul>
-          
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-     
-       </nav>
-	  </div>
-    <!-- 主体部分 -->
-    <div class="content">
-      <div class="container">    
-          <div class="row">
-            <!-- 左侧导航栏部分 -->
-            <div class="col-md-2 con_nav">
-                  <ul class="nav nav-pills nav-stacked">
-                    <li role="presentation" class="active"><a href="#">Home</a></li>
-                    <li role="presentation"><a href="#">Profile</a></li>
-                    <li role="presentation"><a href="#">Messages</a></li>
-                    <li role="presentation"><a href="#">Profile</a></li>
-                    <li role="presentation"><a href="#">Messages</a></li>
-                  </ul>
-            </div>
-            <!-- 微博内容部分 -->
-            <div class="col-md-7">
-                <!-- 发布内容部分 -->
-                <div class="speak">
-                  <p class="text-success"><strong>有什么新鲜的事值得分享</strong></p>
-                  <textarea id="editor_id" name="content" style="width:400px;height:300px;"></textarea>
-                  <div class="text-right">
-                    <button id="submit" class="btn btn-default">发布</button>
-                  </div>
-                </div>
-                <!-- 动态部分 -->
-                <div class="event_con" th:if="${personBLogs.size()>0}" th:each="ele : ${personBLogs}">
-                     <div>
-                          <a href="#"><span th:text="${ele.blogUser.username}">模拟用户</span></a>
-                          <p th:utext="${ele.content}">今天我很嗨</p>                  
-                     </div>
-                    
-                     <div>
-                           <span th:text="${ele.createdDate}"></span>
-                                                              
-                           <a href="#">
-                                 <span class="glyphicon glyphicon-comment" aria-hidden="true" th:text="${ele.commentCount}" title="评论">10</span>                              
-                           </a>
-                                                                                
-                           <a href="#">
-                                 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" th:text="${ele.favour}" title="点赞">10</span>
-                           </a>
-                     </div> 
-                    <hr></hr>
-                </div>
-                <div class="no_content" th:if="${personBLogs.size()==0}">你还没有发布任何微博哦</div>
-            </div>
-            <!-- 右侧信息部分 -->
-            <div class="col-md-3">
-                <!-- 个人信息部分 -->
-                <div class="person-info">
-                    <div class="person-header">
-                      <img  class="img-circle" alt="80x80" src="images/loginImages/huaidan.jpg" />
-                    </div>
-                    <div class="name text-center" th:text="${user.username}">
-                        罗罗罗罗罗罗罗敏
-                    </div>
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-2">
-                            <ul class="list-inline fans">
-                                <li><a href="##"><strong>373</strong><span>关注</span></a></li>
-                                <li><a href="##"><strong>151</strong><span>粉丝</span></a></li>
-                                <li><a href="##"><strong>1213</strong><span>微博</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="right-con">
-                  <p>
-                    【比赛结果】2:0！Team WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一
-                  </p>
-                  <p>
-                    【比赛结果】2:0！Team WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一
-                  </p>
-                  <p>
-                    【比赛结果】2:0！Team WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一
-                  </p>
-                  <p>
-                    【比赛结果】2:0！Team WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一
-                  </p>
-                </div>
-            </div>
-          </div>
-	    
-      </div> 
-    </div>
-  </div>
+					</div>
 
- </body>
-   <script  th:src="@{/kindeditor/kindeditor-all.js}"></script>
-  <script  th:src="@{/kindeditor/lang/zh-CN.js}"></script>
-    <script  th:src="@{/js/home.js}"></script>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+
+							<!-- 用户登陆就显示当前登陆用户 -->
+							<li th:if="${user}"><a href="#"><span
+									class="glyphicon glyphicon-user" aria-hidden="true"
+									th:text="${user.username}">模拟用户</span></a></li>
+
+							<!-- 用户未登陆就显示登陆-->
+							<li th:if="${user==null}"><a href="/login"><span
+									class="glyphicon glyphicon-user" aria-hidden="true">登陆</span></a></li>
+
+							<li><a href="#"><span
+									class="glyphicon glyphicon-log-out" aria-hidden="true">退出</span></a></li>
+
+							<li><a href="#"><span class="glyphicon glyphicon-cog"
+									aria-hidden="true">设置</span></a></li>
+							<li><a href="#"><span
+									class="glyphicon glyphicon-comment" aria-hidden="true">消息</span></a>
+							</li>
+							<li><a href="/square"><span
+									class="glyphicon glyphicon-flag" aria-hidden="true">广场</span></a>
+							</li>
+						</ul>
+
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container-fluid -->
+
+			</nav>
+		</div>
+		<!-- 主体部分 -->
+		<div class="content">
+			<div class="container">
+				<div class="row">
+					<!-- 左侧导航栏部分 -->
+					<div class="col-md-2 con_nav">
+						<ul class="nav nav-pills nav-stacked">
+							<li role="presentation" class="active"><a href="#">Home</a></li>
+							<li role="presentation"><a href="#">Profile</a></li>
+							<li role="presentation"><a href="#">Messages</a></li>
+							<li role="presentation"><a href="#">Profile</a></li>
+							<li role="presentation"><a href="#">Messages</a></li>
+						</ul>
+					</div>
+					<!-- 微博内容部分 -->
+					<div class="col-md-7">
+						<!-- 发布内容部分 -->
+						<div class="speak">
+							<p class="text-success">
+								<strong>有什么新鲜的事值得分享</strong>
+							</p>
+							<textarea id="editor_id" name="content"
+								style="width: 400px; height: 300px;"></textarea>
+							<div class="text-right">
+								<button id="submit" class="btn btn-default">发布</button>
+							</div>
+						</div>
+						<!-- 动态部分 -->
+						<div class="event_con" th:if="${personBLogs.size()>0}"
+							th:each="ele : ${personBLogs}">
+							<div>
+								<a href="#"><span th:text="${ele.blogUser.username}">模拟用户</span></a>
+								<p th:utext="${ele.content}">今天我很嗨</p>
+							</div>
+
+							<div>
+								<span th:text="${ele.createdDate}"></span> <a href="#"> <span
+									class="glyphicon glyphicon-comment" aria-hidden="true"
+									th:text="${ele.commentCount}" title="评论">10</span>
+								</a> <a href="#"> <span class="glyphicon glyphicon-thumbs-up"
+									aria-hidden="true" th:text="${ele.favour}" title="点赞">10</span>
+								</a>
+							</div>
+							<hr></hr>
+						</div>
+						<nav>
+							<ul class="pagination">
+								<li>
+								      <a href="javascript:void(0)"  aria-label="Previous"> 
+								           <span aria-hidden="true">&laquo;</span>
+								      </a>
+								</li>
+						
+									<li th:each="index:${sumPage}">
+									    <a href="javascript:void(0)" th:text="${index}"></a>
+									</li>
+								
+								<li>
+								     <a href="javascript:void(0)"   aria-label="Next"> 
+								          <span aria-hidden="true">&raquo;</span>
+								     </a>
+							    </li>
+							</ul>
+						</nav>
+						<div class="no_content" th:if="${personBLogs.size()==0}">你还没有发布任何微博哦</div>
+					</div>
+					<!-- 右侧信息部分 -->
+					<div class="col-md-3">
+						<!-- 个人信息部分 -->
+						<div class="person-info">
+							<div class="person-header">
+								<img class="img-circle" alt="80x80"
+									src="../images/loginImages/huaidan.jpg" />
+							</div>
+							<div class="name text-center" th:text="${user.username}">
+								罗罗罗罗罗罗罗敏</div>
+							<div class="row">
+								<div class="col-md-10 col-md-offset-2">
+									<ul class="list-inline fans">
+										<li><a href="##"><strong>373</strong><span>关注</span></a></li>
+										<li><a href="##"><strong>151</strong><span>粉丝</span></a></li>
+										<li><a href="##"><strong>1213</strong><span>微博</span></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="right-con">
+							<p>【比赛结果】2:0！Team
+								WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一</p>
+							<p>【比赛结果】2:0！Team
+								WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一</p>
+							<p>【比赛结果】2:0！Team
+								WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一</p>
+							<p>【比赛结果】2:0！Team
+								WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+<script th:src="@{/kindeditor/kindeditor-all.js}"></script>
+<script th:src="@{/kindeditor/lang/zh-CN.js}"></script>
+<script th:src="@{/js/home.js}"></script>
 </html>

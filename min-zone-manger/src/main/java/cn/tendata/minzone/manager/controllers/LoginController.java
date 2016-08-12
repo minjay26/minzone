@@ -10,14 +10,8 @@ import cn.tendata.minzone.manager.data.domain.User;
 @RequestMapping("/login")
 public class LoginController {
     
-	@RequestMapping(value={"","/"},method=RequestMethod.GET)
+	@RequestMapping(value={"","/"})
 	public String login(){		
 		return "/login";
 	}
-	
-//	@RequestMapping(method=RequestMethod.POST)
-//	public String login(User user){
-//		
-//		return "/home";
-//	}
 }

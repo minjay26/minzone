@@ -50,7 +50,7 @@
 							<li th:if="${user==null}"><a href="/login"><span
 									class="glyphicon glyphicon-user" aria-hidden="true">登陆</span></a></li>
 
-							<li><a href="#"><span
+							<li><a href="/logout"><span
 									class="glyphicon glyphicon-log-out" aria-hidden="true">退出</span></a></li>
 
 							<li><a href="#"><span class="glyphicon glyphicon-cog"
@@ -100,20 +100,28 @@
 						<!-- 动态部分 -->
 						<div class="event_con" th:if="${personBLogs.size()>0}"
 							th:each="ele : ${personBLogs}">
+							<input type="hidden" th:value="${ele.bId}"/>
 							<div>
 								<a href="#"><span th:text="${ele.blogUser.username}">模拟用户</span></a>
 								<p th:utext="${ele.content}">今天我很嗨</p>
 							</div>
 
 							<div>
-								<span th:text="${ele.createdDate}"></span> <a href="#"> <span
-									class="glyphicon glyphicon-comment" aria-hidden="true"
-									th:text="${ele.commentCount}" title="评论">10</span>
-								</a> <a href="#"> <span class="glyphicon glyphicon-thumbs-up"
-									aria-hidden="true" th:text="${ele.favour}" title="点赞">10</span>
+								<span th:text="${ele.createdDate}"></span> 
+								<a href="#">
+								      <span class="glyphicon glyphicon-comment" aria-hidden="true"
+									        th:text="${ele.commentCount}" title="评论">10</span>
+								</a> 
+								<a href="#"> 
+								      <span class="glyphicon glyphicon-thumbs-up"
+									        aria-hidden="true" th:text="${ele.favour}" title="点赞">10</span>
 								</a>
+								
 							</div>
-							<hr></hr>
+							<div class="comment_content" style="display:none;">
+							     <textarea id="editor_id" name="comment"></textarea>
+							fsgdfg</div>
+							<hr style="border-top: 1px solid blue;"></hr>
 						</div>
 						<nav>
 							<ul class="pagination">

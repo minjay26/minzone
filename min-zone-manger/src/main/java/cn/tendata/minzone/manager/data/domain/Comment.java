@@ -1,7 +1,5 @@
 package cn.tendata.minzone.manager.data.domain;
 
-import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -11,14 +9,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Comment extends AbstractEntityAuditable<Integer>{
-	
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
     private Integer cId;

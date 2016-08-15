@@ -1,4 +1,5 @@
 $(function(){
+	   var K = window.KindEditor;//编辑器全局变量
        var header = $("meta[name='_csrf_header']").attr("content");
 	   var token = $("meta[name='_csrf']").attr("content");
 	   $(document).ajaxSend(function (e, xhr, options) {
@@ -10,33 +11,27 @@ $(function(){
 	       }
 	   });
 	   
-	var name="content",
-	    height=100,
-	    width=100,
-	    items=['multiimage', 'emoticons',  'link'],
-	    id="blogid";
-	getEditor(id,name,height,width,items);
 	
 	function getEditor(id,name,height,width,items){
-		var editor;
-		KindEditor.ready(function(K) {
-			editor = K.create('textarea[name='+name+']', {
+			return K.create('textarea[name='+name+']', {
 				 id:id,
 				 resizeType : 0,
 				 height:height+"px",
 				 width:width+"%",
 				 allowPreviewEmoticons : true,
+				 minHeight:"50px",
 				 items : items				   
-			});			
-			editor.sync();
-			
-		});
+			});	
 	}
 
-
+	var name="content",
+    height=150,
+    width=100,
+    items=['multiimage', 'emoticons',  'link'],
+    id="blogid",
+    editor =getEditor(id,name,height,width,items);
 	
-	
-	$("#submit").click(function(){		
+	$("#submit").click(function(){	
 		 var content= editor.html();
 			$.ajax({
 				type:"post",
@@ -51,91 +46,102 @@ $(function(){
 			})
 	})
 	
-//    $.ajax({
-//    	'url':"user_blog/get_blogs/1"
-//    	'type':GET,
-//    	'success':function(data){
-//    		var html="";
-//    		for(var i=0; i<data.personBLogs.length; i++){
-//    			html += "<div class='event_con'>"
-//				+"<div>"
-//					+"<a href='#'><span>"+data.personBLogs[i].blogUser.username+"</span></a>"
-//					+"<p>"+data.personBLogs[i].content+"</p>"
-//				+"</div>"
-//				+"<div>"
-//					+"<span>"+data.personBLogs[i].createdDate+"</span>"
-//					+"<a href='#'> "
-//					    +"<span class='glyphicon glyphicon-comment' aria-hidden='true' title='评论'>"
-//					    +data.personBLogs[i].commentCount
-//					    +"</span>"
-//					+"</a>"
-//					+"<a href="#">" 
-//					   +"<span class='glyphicon glyphicon-thumbs-up' aria-hidden='true' title='点赞'>"
-//					  +data.personBLogs[i].favour
-//					  +"</span>"
-//					+"</a>"
-//				+"</div>"
-//				+"<hr></hr>"
-//			+"</div>"
-//    		};
-//    		
-//    		$("#comment_content").append(html);
-//    		
-//    	}
-//    })
-    
-//    $.jqPaginator('#pagination', {
-//        totalPages: 100,
-//        visiblePages: 10,
-//        currentPage: 3,
-////        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
-//        onPageChange: function (num, type) {
-//            $('#p1').text(type + '：' + num);
-//        }
-//    });
-//    $.jqPaginator('#pagination1', {
-//        totalPages: 100,
-//        visiblePages: 10,
-//        currentPage: 3,
-//        prev: '<li class="prev"><a href="javascript:;">Previous</a></li>',
-//        next: '<li class="next"><a href="javascript:;">Next</a></li>',
-//        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
-//        onPageChange: function (num, type) {
-//            $('#p2').text(type + '：' + num);
-//        }
-//    });
-	$
 
-	$(".event_con").each(function(index){
+
+//	$(".event_con").each(function(index){
+//		
+//		var $thisComment=$(this),
+//            commentEditor;
+//		
+//		$thisComment.find(".glyphicon-comment").click(function(){
+//			var uId=$(this).parents('.event_con').find(':input').val();			
+//			var name="comment"+uId,
+//		        height=100,
+//		        width=50,
+//		        items=[ 'emoticons', 'link'],
+//			    editorid="comment"+uId;
+//			
+//			commentEditor= getEditor(editorid,name,height,width,items);
+//			commentEditor.sync();
+//			$.ajax({
+//				type:"get",
+//				url:"/user_comment/getComments/"+uId,
+//				success:function(data){
+//				   var html="";
+//				   $.each(data,function(index,ele){
+//					   html+="<div>" +
+//					         "<a href='#'><span>"+ele.commentUser.username+"</span></a>:"+					         
+//					         "<span>"+ele.commentContent+"</span>"+
+//					         "<span>"+ele.createdDate+"</span>"+
+//					         "</div>"
+//				   })
+//				  $thisComment.find(".show_comment").empty().append(html);
+//				}
+//			})
+//			var $content=$(this).parents().children('.comment_content');
+//			$content.slideToggle();
+//		})
+//		
+//		$thisComment.find(".btn-default").click(function(){
+//		    var id="comment"+$thisComment.find(':input').val();
+//			alert(id);
+//			var content=$('#'+id).val();
+//			//var content=commentEditor.html();
+//			//var content=$thisComment.find(".editor_comment").innerHTML;
+//			alert(content);
+//		})
+//	})
+	
+	var commentEditor;
+	$(".event_con").find(".glyphicon-comment").click(function(){
+		var $parentId = $(this).closest('.event_con'),
+		    uId=$(this).closest('.event_con').children('input').val();			
+		var name="comment"+uId,
+	        height=100,
+	        width=50,
+	        items=[ 'emoticons', 'link'],
+		    editorid="comment"+uId;
 		
-		$(this).find(".glyphicon-comment").click(function(){
-			var uId=$(this).parents('.event_con').find(':input').val();			
-			var name="comment",
-		        height=100,
-		        width=40,
-		        items=[ 'emoticons', 'link'],
-			    editorid="comment"+uId;
-		    getEditor(editorid,name,height,width,items);
-			$.ajax({
-				type:"get",
-				url:"/user_comment/getComments/"+uId,
-				success:function(data){
-					alert(data);
-				}
-			})
-			var $content=$(this).parents().children('.comment_content');
-			$content.slideToggle();
+		
+		
+		commentEditor = getEditor(editorid,name,height,width,items);
+		commentEditor.sync();
+	    
+		$.ajax({
+			type:"get",
+			url:"/user_comment/getComments/"+uId,
+			success:function(data){
+			   var html="";
+			   $.each(data,function(index,ele){
+				   html+="<div>" +
+				         "<a href='#'><span>"+ele.commentUser.username+"</span></a>:"+					         
+				         "<span>"+ele.commentContent+"</span>"+
+				         "<span>"+new Date(ele.createdDate).format("yyyy-MM-dd hh:mm:ss")+"</span>"+
+				         "</div>"
+			   })
+			  $parentId.find(".show_comment").empty().append(html);
+			}
 		})
-		//$(".comment_content").slideToggle();
+		var $content=$(this).parents().children('.comment_content');
+		$content.slideToggle();
+		
+		
+		
+		$parentId.find(".btn-default").click(function(){
+		    var bId=$parentId.children('input').val();
+			var content=commentEditor.html();
+		   $.ajax({
+			    type:"post",
+			    data:{"content":content},
+			    url:"/user_comment/comment/"+bId,
+			    success:function(){
+			        
+			    }
+		   })
+			
+		  })
 	})
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	  
 	
 })

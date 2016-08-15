@@ -6,6 +6,7 @@
 <meta name="_csrf" th:content="${_csrf.token}"/>
 <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 <meta name="_csrf_name" th:content="${_csrf.parameterName}"/>
+<script th:src="@{/js/lib/date.format.js}"></script>
 <script th:src="@{/js/jquery/jquery-1.11.3.min.js}"></script>
 <link th:href="@{/kindeditor/themes/default/default.css}" />
 <link rel="stylesheet" th:href="@{\bootstrap\css\bootstrap.css}" />
@@ -119,9 +120,14 @@
 								
 							</div>
 							<div class="comment_content" style="display:none;">
-							     <textarea id="editor_id" name="comment"></textarea>
-							fsgdfg</div>
-							<hr style="border-top: 1px solid blue;"></hr>
+							     <div class="show_comment"></div>
+							     <textarea th:id="comment+${ele.bId}"  th:name="comment+${ele.bId}"></textarea>
+							     
+							     <div class="text-center" style="position:relative">
+								     <button  class="btn btn-default" style="position:absolute;padding:1px 1px;left:293px;">评论</button>
+							     </div>
+                            </div>
+							<hr></hr>
 						</div>
 						<nav>
 							<ul class="pagination">

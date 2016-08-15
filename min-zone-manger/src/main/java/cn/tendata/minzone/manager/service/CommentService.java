@@ -9,4 +9,6 @@ public interface CommentService {
 
 	List<Comment> getAll(Blog blog);
 
+	void comment(Comment comment);
+
 }

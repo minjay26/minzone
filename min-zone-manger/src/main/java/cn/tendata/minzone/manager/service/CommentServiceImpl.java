@@ -17,9 +17,14 @@ public class CommentServiceImpl implements CommentService{
     
 	@Override
 	public List<Comment> getAll(Blog blog) {
-		System.out.println(commentRepository);
 	  List<Comment> comments=this.commentRepository.findByOfBlog(blog);
 		return comments;
+	}
+
+	@Override
+	public void comment(Comment comment) {
+		this.commentRepository.save(comment);
+		
 	}
 
 }

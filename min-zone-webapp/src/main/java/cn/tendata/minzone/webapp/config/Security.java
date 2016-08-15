@@ -24,8 +24,13 @@ public class Security extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().ignoringAntMatchers("/login/**")
-		        .and().authorizeRequests().anyRequest().permitAll()// 所有需要经过认证登录后才能访问
+		        .and().authorizeRequests().anyRequest().permitAll()
 				.and().formLogin().loginPage("/login").defaultSuccessUrl("/home/1")
 				.and().logout().permitAll();
+		
+//		http.csrf().ignoringAntMatchers("/login/**")
+//        .and().authorizeRequests().anyRequest().authenticated()
+//		.and().formLogin().loginPage("/login").defaultSuccessUrl("/home/1")
+//		.and().logout().permitAll();
 	}
 }

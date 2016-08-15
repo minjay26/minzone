@@ -9,6 +9,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -29,6 +30,7 @@ public class Blog extends AbstractEntityAuditable<Integer>{
     @JoinColumn(name="uId",unique=false)
 	private User blogUser;
 	
+	@Lob
 	private String content;
     
 	

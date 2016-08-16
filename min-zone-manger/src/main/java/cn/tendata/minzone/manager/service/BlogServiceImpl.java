@@ -36,6 +36,12 @@ public class BlogServiceImpl implements BlogService{
 		return this.blogRepository.findAllByBlogUser(user.getuId(),beginSite,size);
 		
 	}
+
+	@Override
+	public void favour(Integer bId) {
+		this.blogRepository.favour(bId);
+		
+	}
 	
 	
 

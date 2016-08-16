@@ -23,6 +23,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,19 +57,14 @@ public class BlogController{
 		this.blogService.addBlog(blog);
 		return "success";
 	}
-//	
-//	@RequestMapping("/get_blogs/1")
-//	@ResponseBody
-//	private Map<String, Object> getPersonBLogs(@CurrentUser User user){
-//		List<Blog> personBLogs=this.blogService.getAll(user,0,5);
-//		int sumPage=this.blogService.getAll(user, 0, Integer.MAX_VALUE).size()/8+1;
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("personBLogs", personBLogs);
-//		map.put("sumPage", sumPage);
-//		return map;
-//	}
 
 
+   @RequestMapping(value="/favour/{bId}",method=RequestMethod.POST)
+   @ResponseBody
+   public String favour(@PathVariable("bId") Integer bId){
+	   this.blogService.favour(bId);
+	   return "";
+   }
 
 
 

@@ -15,4 +15,6 @@ public interface BlogService {
 	void addBlog(Blog blog);
 	
 	List<Blog> getAll(User user,Integer beginSite,Integer size);
+
+	void favour(Integer bId);
 }

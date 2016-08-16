@@ -2,6 +2,9 @@
 body {
 	font-family: "微软雅黑";
 }
+a:hover,a:link,a {
+	text-decoration:none;
+}
 .content {
 	width: 100%;
 }
@@ -40,4 +43,10 @@ body {
 	text-align:center;
 	height:50px;
 	font-size:23px;
+}
+.unfavour {
+	color:#ccc;
+}
+.pl {
+	padding-left:40px;
 }

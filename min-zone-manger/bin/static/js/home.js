@@ -1,4 +1,5 @@
 $(function(){
+	
 	   var K = window.KindEditor;//编辑器全局变量
        var header = $("meta[name='_csrf_header']").attr("content");
 	   var token = $("meta[name='_csrf']").attr("content");
@@ -11,7 +12,8 @@ $(function(){
 	       }
 	   });
 	   
-	
+	  loadData(1);
+	  
 	function getEditor(id,name,height,width,items){
 			return K.create('textarea[name='+name+']', {
 				 id:id,
@@ -23,6 +25,7 @@ $(function(){
 				 items : items				   
 			});	
 	}
+	
 
 	var name="content",
     height=150,
@@ -31,6 +34,7 @@ $(function(){
     id="blogid",
     editor =getEditor(id,name,height,width,items);
 	
+	
 	$("#submit").click(function(){	
 		 var content= editor.html();
 			$.ajax({
@@ -38,7 +42,7 @@ $(function(){
 				url:"/user_blog/submit",
 				data:{content:content},				
 				success:function(result){
-					location.href ="/home/1";
+					location.href ="/home";
 				},
 				error:function(XMLHttpRequest, textStatus, errorThrown){
 					
@@ -49,66 +53,38 @@ $(function(){
   $(".glyphicon-thumbs-up").click(function(){
 	  var $this=$(this),
 	      bId=$this.closest('.event_con').children('input').val();
-	     alert(bId);
 	  if($this.hasClass("unfavour")){
 		  $this.toggleClass("unfavour");
 		  $.post("/user_blog/favour/"+bId,function(){
-			  alert("success");
+			  alert("favour success");
 		  })
 	  }else{
 		  $this.toggleClass("unfavour");
 		  
 	  }
   })
-
-//	$(".event_con").each(function(index){
-//		
-//		var $thisComment=$(this),
-//            commentEditor;
-//		
-//		$thisComment.find(".glyphicon-comment").click(function(){
-//			var uId=$(this).parents('.event_con').find(':input').val();			
-//			var name="comment"+uId,
-//		        height=100,
-//		        width=50,
-//		        items=[ 'emoticons', 'link'],
-//			    editorid="comment"+uId;
-//			
-//			commentEditor= getEditor(editorid,name,height,width,items);
-//			commentEditor.sync();
-//			$.ajax({
-//				type:"get",
-//				url:"/user_comment/getComments/"+uId,
-//				success:function(data){
-//				   var html="";
-//				   $.each(data,function(index,ele){
-//					   html+="<div>" +
-//					         "<a href='#'><span>"+ele.commentUser.username+"</span></a>:"+					         
-//					         "<span>"+ele.commentContent+"</span>"+
-//					         "<span>"+ele.createdDate+"</span>"+
-//					         "</div>"
-//				   })
-//				  $thisComment.find(".show_comment").empty().append(html);
-//				}
-//			})
-//			var $content=$(this).parents().children('.comment_content');
-//			$content.slideToggle();
-//		})
-//		
-//		$thisComment.find(".btn-default").click(function(){
-//		    var id="comment"+$thisComment.find(':input').val();
-//			alert(id);
-//			var content=$('#'+id).val();
-//			//var content=commentEditor.html();
-//			//var content=$thisComment.find(".editor_comment").innerHTML;
-//			alert(content);
-//		})
-//	})
+  
+  $("#blog_content").on('click',".glyphicon-thumbs-up",function(e){
+	  var $thisItem = $(e.target),
+	      $parentId = $thisItem.closest('.event_con'),
+	      bId=$parentId.children('input').val();
+	  if($thisItem.hasClass("unfavour")){
+		  $thisItem.toggleClass("unfavour");
+		  $.post("/user_blog/favour/"+bId,function(){
+			  alert("success");
+		  })
+	  }else{
+		  $thisItem.toggleClass("unfavour");
+		  
+	  }
+  })
 	
 	var commentEditor;
-	$(".event_con").find(".glyphicon-comment").click(function(){
-		var $parentId = $(this).closest('.event_con'),
-		    bId=$(this).closest('.event_con').children('input').val();			
+	$("#blog_content").on('click',".glyphicon-comment",function(e){
+
+		var $thisItem = $(e.target),
+		    $parentId = $thisItem.closest('.event_con'),
+		    bId=$parentId.children('input').val();	
 		var name="comment"+bId,
 	        height=100,
 	        width=50,
@@ -118,7 +94,6 @@ $(function(){
 		
 		
 		commentEditor = getEditor(editorid,name,height,width,items);
-		commentEditor.sync();
 	    
 		$.ajax({
 			type:"get",
@@ -135,7 +110,7 @@ $(function(){
 			  $parentId.find(".show_comment").empty().append(html);
 			}
 		})
-		var $content=$(this).parents().children('.comment_content');
+		var $content=$thisItem.parents().children('.comment_content');
 		$content.slideToggle();
 		
 		
@@ -148,13 +123,79 @@ $(function(){
 			    data:{"content":content},
 			    url:"/user_comment/comment/"+bId,
 			    success:function(){
-			        alert("sdd").fadeOut(2000);
+			        alert("sdd");
 			    }
 		   })
 			
 		  })
 	})
+
 	
-	  
+	
+	function loadData(page){
+		$.ajax({
+			url:"/user_blog/getAllBlog/"+page,
+			type:"get",
+			success:function(data){
+				var html="<input type='hidden' id='sumPage' value='"+data.sumPage+"' />";
+				   // sumPage=data.sumPage;
+				 
+				 $.each(data.lists,function(index,ele){
+					   html+="<div class='event_con'>"+
+						"<input type='hidden'  value='"+ele.bId+"' />"+
+						"<div>"+
+							"<a href='#'><span>"+ele.blogUser.username+"</span></a>"+
+							"<p>"+ele.content+"</p>"+
+						"</div>"+
+
+						"<div>"+
+							"<span>"+new Date(ele.createdDate).format('yyyy-MM-dd hh:mm:ss')+"</span>"+ 
+							"<a href='#' class='pl'>"+
+							      "<span class='glyphicon glyphicon-comment' aria-hidden='true'"+
+								        "title='评论'>"+ele.commentCount+"</span>"+
+							"</a>"+ 
+							"<a href='#' class='pl'>"+ 
+							      "<span class='glyphicon glyphicon-thumbs-up unfavour'"+
+								        "aria-hidden='true'  title='点赞'>"+ele.favour+"</span>"+
+							"</a>"+
+							
+						"</div>"+
+						"<div class='comment_content' style='display:none;'>"+
+						     "<div class='show_comment'></div>"+
+						     "<textarea id='comment"+ele.bId  +"' name='comment"+ele.bId+"'></textarea>"+
+						     
+						     "<div class='text-center' style='position:relative'>"+
+							     "<button  class='btn btn-default' style='position:absolute;padding:1px 1px;left:293px;'>评论</button>"+
+						     "</div>"+
+                       "</div>"+
+						"<hr></hr>"+
+					"</div>"
+				   })
+				   
+				   $("#blog_content").append(html);
+				 //$('#blog_content').data('sumpage',sumPage)
+				 //setPaginator(sumPage,page);
+			}
+		})
+	
+	}
+//	var sumPage = $('#sumPage').val();
+//	alert(sumPage);
+	function setPaginator(){
+		
+		
+		$('.pagination').jqPaginator({
+		    totalPages: 10,
+		    visiblePages: 7,
+		    currentPage: 1,
+		    onPageChange: function (num, type) {
+		    	
+		    }
+		});
+	}
+	
+	setPaginator();
+	
+	
 	
 })

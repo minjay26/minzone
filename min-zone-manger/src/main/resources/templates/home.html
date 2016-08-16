@@ -99,56 +99,10 @@
 							</div>
 						</div>
 						<!-- 动态部分 -->
-						<div class="event_con" th:if="${personBLogs.size()>0}"
-							th:each="ele : ${personBLogs}">
-							<input type="hidden" th:value="${ele.bId}"/>
-							<div>
-								<a href="#"><span th:text="${ele.blogUser.username}">模拟用户</span></a>
-								<p th:utext="${ele.content}">今天我很嗨</p>
-							</div>
-
-							<div>
-								<span th:text="${ele.createdDate}"></span> 
-								<a href="#" class="pl">
-								      <span class="glyphicon glyphicon-comment" aria-hidden="true"
-									        th:text="${ele.commentCount}" title="评论">10</span>
-								</a> 
-								<a href="#" class="pl"> 
-								      <span class="glyphicon glyphicon-thumbs-up unfavour"
-									        aria-hidden="true" th:text="${ele.favour}" title="点赞">10</span>
-								</a>
-								
-							</div>
-							<div class="comment_content" style="display:none;">
-							     <div class="show_comment"></div>
-							     <textarea th:id="comment+${ele.bId}"  th:name="comment+${ele.bId}"></textarea>
-							     
-							     <div class="text-center" style="position:relative">
-								     <button  class="btn btn-default" style="position:absolute;padding:1px 1px;left:293px;">评论</button>
-							     </div>
-                            </div>
-							<hr></hr>
-						</div>
-						<nav>
-							<ul class="pagination">
-								<li>
-								      <a href="javascript:void(0)"  aria-label="Previous"> 
-								           <span aria-hidden="true">&laquo;</span>
-								      </a>
-								</li>
+						<div id="blog_content" data-sumpage="null"></div>
+							
 						
-									<li th:each="index:${sumPage}">
-									    <a href="javascript:void(0)" th:text="${index}"></a>
-									</li>
-								
-								<li>
-								     <a href="javascript:void(0)"   aria-label="Next"> 
-								          <span aria-hidden="true">&raquo;</span>
-								     </a>
-							    </li>
-							</ul>
-						</nav>
-						<div class="no_content" th:if="${personBLogs.size()==0}">你还没有发布任何微博哦</div>
+						<div class="pagination"></div>
 					</div>
 					<!-- 右侧信息部分 -->
 					<div class="col-md-3">
@@ -191,4 +145,5 @@
 <script th:src="@{/kindeditor/kindeditor-all.js}"></script>
 <script th:src="@{/kindeditor/lang/zh-CN.js}"></script>
 <script th:src="@{/js/home.js}"></script>
+<script th:src="@{/js/lib/jqPaginator.js}"></script>
 </html>

@@ -26,8 +26,8 @@ public class FavourController {
 
 
 	@RequestMapping(value="/favour/{bId}",method=RequestMethod.POST)
-	public String favour(@PathVariable("bId") Blog blog){
-		this.blogService.favour(blog);
+	public String favour(@PathVariable("bId") Integer bId){
+		this.blogService.favour(bId);
 		return "";
 	}
 }

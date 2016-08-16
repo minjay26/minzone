@@ -34,6 +34,7 @@ import cn.tendata.minzone.manager.bind.annotation.CurrentUser;
 import cn.tendata.minzone.manager.data.domain.Blog;
 import cn.tendata.minzone.manager.data.domain.User;
 import cn.tendata.minzone.manager.service.BlogService;
+import cn.tendata.minzone.manager.util.PaginationResult;
 
 @Controller
 @RequestMapping("/user_blog")
@@ -66,8 +67,20 @@ public class BlogController{
 	   return "";
    }
 
-
-
+  
+   @RequestMapping(value="/getAllBlog/{page}",method=RequestMethod.GET)
+   @ResponseBody
+   public PaginationResult<Blog> getAll(
+		   @PathVariable("page") Integer page,
+		   final @CurrentUser User user,
+		   PaginationResult<Blog> result){
+	   List<Blog> personBLogs=this.blogService.getAll(user,(page-1)*5,5);
+		int sumPage=this.blogService.getAll(user, 0, Integer.MAX_VALUE).size()/8+1;
+		System.out.println(sumPage);
+		result.fillData(personBLogs, sumPage);
+		System.out.println(result.getSumPage());
+		return result;
+   }
 
 	
 

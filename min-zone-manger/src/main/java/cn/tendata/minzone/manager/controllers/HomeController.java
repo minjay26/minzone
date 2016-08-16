@@ -27,13 +27,19 @@ public class HomeController {
 
 
 
-	@RequestMapping(value="/{page}",method=RequestMethod.GET)
-	public String home(@PathVariable("page") Integer page,ModelMap map,final @CurrentUser User user){
-		List<Blog> personBLogs=this.blogService.getAll(user,(page-1)*5,5);
-		int sumPage=this.blogService.getAll(user, 0, Integer.MAX_VALUE).size()/8+1;
+	@RequestMapping(method=RequestMethod.GET)
+	public String home(ModelMap map,final @CurrentUser User user){
 		map.addAttribute("user", user);
-		map.addAttribute("personBLogs", personBLogs);
-		map.addAttribute("sumPage", sumPage);
 		return "/home";
 	}
+	
+//	@RequestMapping(value="/{page}",method=RequestMethod.GET)
+//	public String home(@PathVariable("page") Integer page,ModelMap map,final @CurrentUser User user){
+//		List<Blog> personBLogs=this.blogService.getAll(user,(page-1)*5,5);
+//		int sumPage=this.blogService.getAll(user, 0, Integer.MAX_VALUE).size()/8+1;
+//		map.addAttribute("user", user);
+//		map.addAttribute("personBLogs", personBLogs);
+//		map.addAttribute("sumPage", sumPage);
+//		return "/home";
+//	}
 }

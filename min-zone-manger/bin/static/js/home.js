@@ -135,7 +135,7 @@ $(function(){
 			    data:{"content":content},
 			    url:"/user_comment/comment/"+bId,
 			    success:function(){
-			        
+			        alert("sdd").fadeOut(2000);
 			    }
 		   })
 			

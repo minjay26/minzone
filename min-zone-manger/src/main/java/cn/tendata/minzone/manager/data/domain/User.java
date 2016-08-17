@@ -44,7 +44,15 @@ public class User extends AbstractEntityAuditable<Integer> implements UserDetail
 	private int age;
 
 	private String email;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id", unique = false)
+	private Role role;
+	
 
+	@Column(nullable=true)
+	private VType type;
+	
 	public String getTrueName() {
 		return trueName;
 	}
@@ -61,13 +69,7 @@ public class User extends AbstractEntityAuditable<Integer> implements UserDetail
 		this.phone = phone;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id", unique = false)
-	private Role role;
-	
 
-	@Column(nullable=true)
-	private VType type;
 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<>();

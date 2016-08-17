@@ -15,6 +15,7 @@ import cn.tendata.minzone.manager.bind.annotation.CurrentUser;
 import cn.tendata.minzone.manager.data.domain.Blog;
 import cn.tendata.minzone.manager.data.domain.Comment;
 import cn.tendata.minzone.manager.data.domain.User;
+import cn.tendata.minzone.manager.service.BlogService;
 import cn.tendata.minzone.manager.service.CommentService;
 
 @Controller
@@ -23,9 +24,12 @@ public class CommentController {
 	
 	private final CommentService commentService;
 	
+	private final BlogService blogService;
+	
 	@Autowired
-	public CommentController(CommentService commentService) {
+	public CommentController(CommentService commentService,BlogService blogService) {
 		this.commentService = commentService;
+		this.blogService = blogService;
 	}
 
 
@@ -48,6 +52,6 @@ public class CommentController {
 		comment.setOfBlog(blog);
 		comment.setCommentUser(user);
 		this.commentService.comment(comment);
-		
+		this.blogService.addCommentCount(blog.getbId());
 	}
 }

@@ -15,7 +15,7 @@ import cn.tendata.minzone.manager.data.domain.Blog;
 
 public interface BlogRepository extends JpaRepository<Blog, Integer>{
     
-	@Query(value="SELECT DISTINCT b.* from blog b LEFT JOIN (select bf_uid from focus f WHERE f.u_id=:uId) a on b.u_id=a.bf_uid where b.u_id=:uId order by created_date desc "
+	@Query(value="SELECT DISTINCT b.* from blog b inner JOIN (select bf_uid from focus f WHERE f.u_id=:uId) a on b.u_id=a.bf_uid or b.u_id=:uId order by created_date desc "
 			+ "limit :beginSite,:size",nativeQuery=true)
 	List<Blog> findAllByBlogUser(@Param("uId") Integer uId,@Param("beginSite") Integer beginSite,@Param("size") Integer size);
     
@@ -23,5 +23,10 @@ public interface BlogRepository extends JpaRepository<Blog, Integer>{
 	@Modifying
 	@Query(value="update Blog b set b.favour=b.favour+1 where b.bId=?1")
 	void favour(@Param("bId") Integer bId);
+
+	@Transactional
+	@Modifying
+	@Query(value="update Blog b set b.commentCount=b.commentCount+1 where b.bId=?1")
+	void addCommentCount(Integer bId);
 
 }

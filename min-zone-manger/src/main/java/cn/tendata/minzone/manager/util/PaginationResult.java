@@ -72,8 +72,7 @@ public class PaginationResult<T> {
 		this.setSumPage(sumPage);
 	}
 	
-	public void fillData(List<T> list,Integer sumPage){
+	public void fillData(List<T> list){
 		this.setLists(list);
-		this.setSumPage(sumPage);
 	}
 }

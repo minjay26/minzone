@@ -3,11 +3,10 @@ package cn.tendata.minzone.manager.data.domain;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class FocusType implements Serializable{
@@ -19,6 +18,10 @@ public class FocusType implements Serializable{
     private Integer ftId;
     
     private String typeDescribe;
+    
+    @ManyToOne(optional=false)
+    @JoinColumn(name="uId",nullable=false)
+    private User user;
 
 	public Integer getFtId() {
 		return ftId;
@@ -35,6 +38,15 @@ public class FocusType implements Serializable{
 	public void setTypeDescribe(String typeDescribe) {
 		this.typeDescribe = typeDescribe;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
     
+	
     
 }

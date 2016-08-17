@@ -42,6 +42,17 @@ public class BlogServiceImpl implements BlogService{
 		this.blogRepository.favour(bId);
 		
 	}
+
+	@Override
+	public Integer count(User user, int i, int maxValue) {
+		return (int) this.blogRepository.count();
+	}
+
+	@Override
+	public void addCommentCount(Integer bId) {
+		this.blogRepository.addCommentCount(bId);
+		
+	}
 	
 	
 

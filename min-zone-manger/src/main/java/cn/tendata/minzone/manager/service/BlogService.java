@@ -1,5 +1,6 @@
 package cn.tendata.minzone.manager.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -17,4 +18,8 @@ public interface BlogService {
 	List<Blog> getAll(User user,Integer beginSite,Integer size);
 
 	void favour(Integer bId);
+
+	Integer count(User user, int i, int maxValue);
+
+	void addCommentCount(Integer getbId);
 }

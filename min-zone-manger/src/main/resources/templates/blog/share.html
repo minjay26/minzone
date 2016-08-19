@@ -1,0 +1,51 @@
+<input type="hidden" id="share_blog_id" th:value="${bId}"/>
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog">
+
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">分享</h4>
+			</div>
+			<div class="modal-body">
+			   <textarea id="share_content" name="share_content"></textarea>
+			   <div id="share_blog_comment" th:each="ele : ${lists}">
+			    <span th:text="${ele.commentUser.username}"></span>
+			    <span th:text="${ele.commentContent}"></span>
+			    <span th:text="${ele.createdDate}"></span>
+			   </div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-primary">分享</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+var name="share_content",
+    height=100,
+    width=100,
+    items=[ 'emoticons',  'link'],
+    id="share_content",
+    editor =getEditor(id,name,height,width,items);
+	$("#shareModal").modal('show');
+	
+	$(".btn-primary").click(function(){
+		var content=editor.html();
+		    bId=$("#share_blog_id").val();
+		    $.ajax({
+		    	"url":"/user_blog/share/"+bId,
+		    	"type":"post",
+		    	"data":{"content":content},
+		    	"success":function(){
+		    		$("#shareModal").modal('hide');
+		    		location.href ="/home";
+		    	}
+		    })
+	})
+</script>

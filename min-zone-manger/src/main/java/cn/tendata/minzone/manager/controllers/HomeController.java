@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import cn.tendata.minzone.manager.bind.annotation.CurrentUser;
 import cn.tendata.minzone.manager.data.domain.FocusType;
 import cn.tendata.minzone.manager.data.domain.User;
+import cn.tendata.minzone.manager.data.dto.UserDto;
 import cn.tendata.minzone.manager.service.BlogService;
+import cn.tendata.minzone.manager.service.FocusService;
 import cn.tendata.minzone.manager.service.FocusTypeService;
+import cn.tendata.minzone.manager.service.UserService;
 
 @Controller
 @RequestMapping("/home")
@@ -24,10 +27,19 @@ public class HomeController {
 	
 	private final FocusTypeService focusTypeService;
 	
+	private final UserService userService;
+
+	
 	@Autowired
-	public HomeController(BlogService blogService,FocusTypeService focusTypeService) {
+	public HomeController(
+			BlogService blogService,
+			FocusTypeService focusTypeService,
+			UserService userService) {
 		this.blogService = blogService;
 		this.focusTypeService = focusTypeService;
+		this.userService = userService;
+
+
 	}
 
 
@@ -36,9 +48,11 @@ public class HomeController {
 	public String home(ModelMap map,final @CurrentUser User user,HttpSession session){
 		int sumPage=this.blogService.getAll(user, 0, Integer.MAX_VALUE).size()/8+1;
 		List<FocusType> items=this.focusTypeService.getAll(user);
+		UserDto userDto=this.userService.getUserDetail(user);
 		map.addAttribute("sumPage", sumPage);
 		map.addAttribute("user", user);
 		session.setAttribute("items", items);
+		session.setAttribute("userDto", userDto);
 		return "/home";
 	}
 	

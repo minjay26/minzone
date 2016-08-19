@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import cn.tendata.minzone.manager.data.enums.IsShare;
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Blog extends AbstractEntityAuditable<Integer>{
@@ -42,6 +44,14 @@ public class Blog extends AbstractEntityAuditable<Integer>{
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	private Set<Comment> comments;
+	
+	private IsShare isShare;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="_bId",unique=false)
+	private Blog shareBlog;
+	
+	private Integer countShare;
 
 	public Integer getbId() {
 		return bId;
@@ -90,6 +100,31 @@ public class Blog extends AbstractEntityAuditable<Integer>{
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
+
+	public IsShare getIsShare() {
+		return isShare;
+	}
+
+	public void setIsShare(IsShare isShare) {
+		this.isShare = isShare;
+	}
+
+	public Blog getShareBlog() {
+		return shareBlog;
+	}
+
+	public void setShareBlog(Blog shareBlog) {
+		this.shareBlog = shareBlog;
+	}
+
+	public Integer getCountShare() {
+		return countShare;
+	}
+
+	public void setCountShare(Integer countShare) {
+		this.countShare = countShare;
+	}
+	
 	
 	
 }

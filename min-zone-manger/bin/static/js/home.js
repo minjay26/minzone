@@ -98,70 +98,27 @@ $(function(){
 		  })
 	})
 	
+   
 
-
-//	
-//	function loadData(page){
-//		$.ajax({
-//			url:"/user_blog/getAllBlog/"+page,
-//			type:"get",
-//			success:function(data){
-//				var html="",
-//				    sumPage=data.sumPage;
-//				 
-//				 $.each(data.lists,function(index,ele){
-//					   html+="<div class='event_con'>"+
-//						"<input type='hidden'  value='"+ele.bId+"' />"+
-//						"<div>"+
-//							"<a href='#'><span>"+ele.blogUser.username+"</span></a>"+
-//							"<p>"+ele.content+"</p>"+
-//						"</div>"+
-//
-//						"<div>"+
-//							"<span>"+new Date(ele.createdDate).format('yyyy-MM-dd hh:mm:ss')+"</span>"+ 
-//							"<a href='#' class='pl'>"+
-//							      "<span class='glyphicon glyphicon-comment' aria-hidden='true'"+
-//								        "title='评论'>"+ele.commentCount+"</span>"+
-//							"</a>"+ 
-//							"<a href='#' class='pl'>"+ 
-//							      "<span class='glyphicon glyphicon-thumbs-up unfavour'"+
-//								        "aria-hidden='true'  title='点赞'>"+ele.favour+"</span>"+
-//							"</a>"+
-//							"<a href='#' class='pl'>"+ 
-//						      "<span class='glyphicon glyphicon-share'"+
-//							        "aria-hidden='true'  title='转发'></span>"+
-//						    "</a>"+
-//							
-//						"</div>"+
-//						"<div class='comment_content' style='display:none;'>"+
-//						     "<div class='show_comment'></div>"+
-//						     "<textarea id='comment"+ele.bId  +"' name='comment"+ele.bId+"'></textarea>"+
-//						     
-//						     "<div class='text-center' style='position:relative'>"+
-//							     "<button  class='btn btn-default' style='position:absolute;padding:1px 1px;left:293px;'>评论</button>"+
-//						     "</div>"+
-//                       "</div>"+
-//						"<hr></hr>"+
-//					"</div>"
-//				   })
-//				   
-//				   $("#blog_content").empty().append(html);
-//				 //$('#blog_content').data('sumpage',sumPage)
-//				 //setPaginator(sumPage,page);
-//				 
-//				 
-//			}
-//		})
-//	
-//	}
+	$("#blog_content").on('click',".glyphicon-share",function(e){
+		var $thisItem = $(e.target),
+		    $parentId = $thisItem.closest('.event_con'),
+	        bId=$parentId.children('input').val();	
+		$.get("/user_blog/share/"+bId,function(r){
+			$("#share").empty().html(r);
+		})
+		
+	})
+	
+	
 	
 	var sumPage = $('#blog_content').attr('name');
 	setPaginator(url,parseInt(sumPage));
 	
 	
 	
-	
-	
+
+
 	
 	
 })

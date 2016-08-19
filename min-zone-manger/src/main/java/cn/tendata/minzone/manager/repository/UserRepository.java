@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import cn.tendata.minzone.manager.data.domain.User;
-import cn.tendata.minzone.manager.data.domain.VType;
+import cn.tendata.minzone.manager.data.enums.VType;
 
 public interface UserRepository extends JpaRepository<User, Integer>{
 

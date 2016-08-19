@@ -19,6 +19,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import cn.tendata.minzone.manager.data.enums.VType;
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class User extends AbstractEntityAuditable<Integer> implements UserDetails {
@@ -52,6 +54,8 @@ public class User extends AbstractEntityAuditable<Integer> implements UserDetail
 
 	@Column(nullable=true)
 	private VType type;
+	
+	private String headPicture;
 	
 	public String getTrueName() {
 		return trueName;
@@ -168,6 +172,14 @@ public class User extends AbstractEntityAuditable<Integer> implements UserDetail
 
 	public void setType(VType type) {
 		this.type = type;
+	}
+
+	public String getHeadPicture() {
+		return headPicture;
+	}
+
+	public void setHeadPicture(String headPicture) {
+		this.headPicture = headPicture;
 	}
 	
 	

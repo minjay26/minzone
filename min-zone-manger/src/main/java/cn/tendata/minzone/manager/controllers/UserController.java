@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.tendata.minzone.manager.data.domain.Blog;
 import cn.tendata.minzone.manager.data.domain.User;
-import cn.tendata.minzone.manager.data.domain.VType;
+import cn.tendata.minzone.manager.data.enums.VType;
 import cn.tendata.minzone.manager.service.BlogService;
 import cn.tendata.minzone.manager.service.UserService;
 

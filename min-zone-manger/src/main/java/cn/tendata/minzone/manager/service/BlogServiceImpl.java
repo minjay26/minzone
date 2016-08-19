@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.tendata.minzone.manager.data.domain.Blog;
+import cn.tendata.minzone.manager.data.domain.FocusType;
 import cn.tendata.minzone.manager.data.domain.User;
 import cn.tendata.minzone.manager.repository.BlogRepository;
 
@@ -51,6 +52,23 @@ public class BlogServiceImpl implements BlogService{
 	@Override
 	public void addCommentCount(Integer bId) {
 		this.blogRepository.addCommentCount(bId);
+		
+	}
+
+	@Override
+	public Page<Blog> getAllByType(User user, FocusType focusType,Pageable pageable) {
+		
+		return this.blogRepository.findAllByType(user,focusType,pageable);
+	}
+
+	@Override
+	public List<Blog> getAllByType(Integer ftId,Integer beginSite,Integer size) {
+		return this.blogRepository.findAllByType(ftId,beginSite,size);
+	}
+
+	@Override
+	public void addShare(Blog shareBlog) {
+		this.blogRepository.addShareCount(shareBlog.getbId());
 		
 	}
 	

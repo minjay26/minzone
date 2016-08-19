@@ -66,10 +66,10 @@ public class PaginationResult<T> {
 	}
 	
 	
-	public void fillData(Page<T> page,Integer sumPage){
+	public void fillData(Page<T> page){
 		this.setTotalRecords(page.getTotalElements());
 		this.setLists(page.getContent());
-		this.setSumPage(sumPage);
+//		this.setSumPage(sumPage);
 	}
 	
 	public void fillData(List<T> list){

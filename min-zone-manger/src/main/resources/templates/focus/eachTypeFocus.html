@@ -9,7 +9,16 @@
   <div class="container">
       <div id="head" th:include="home :: home_head"></div>
       <div id="content" th:include="home :: content"></div>
+      <input id="currentURL" type="hidden" th:value="${#httpServletRequest.getRequestURI()}"/>
   </div>
-
+   
+     <div th:include="home :: script"></div>
 </body>
+
+<script type="text/javascript">
+   var type=$("#currentURL").val().split("/")[2],   
+       url="/user_blog/getAllBlog/"+type+"/"; 
+   loadData(url,1);
+</script>
+
 </html>

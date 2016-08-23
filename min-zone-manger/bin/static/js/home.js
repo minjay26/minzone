@@ -3,17 +3,17 @@ $(function(){
 	   var token = $("meta[name='_csrf']").attr("content");
 	   $(document).ajaxSend(function (e, xhr, options) {
 	       try {
-	           xhr.setRequestHeader(header, token);
+	           if(xhr.setRequestHeader){
+	    	       xhr.setRequestHeader(header, token);
+	           }else{
+	               //options.accepts[header] = token;
+	           }
 	       }
 	       catch (err) {
 	    	   alert(err);
 	       }
 	   });
 	   
-	 
-	  
-	
-	
 
 	var name="content",
     height=150,
@@ -117,8 +117,21 @@ $(function(){
 	
 	
 	
-
-
-	
+$("#start_upload").on('click',function(){
+    $.ajaxFileUpload({
+        url: '/user/uploadHead',
+        secureuri: false,
+        fileElementId: 'file',
+        dataType: 'json',
+        // 服务器响应失败处理函数
+        error: function (data, status, e){
+                 alert("failed");
+        },     
+        // 服务器成功响应处理函数
+        success: function (data, status){
+                alert("success:"+status)
+        }        
+    });
+})
 	
 })

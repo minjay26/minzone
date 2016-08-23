@@ -7,6 +7,8 @@
 <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 <meta name="_csrf_name" th:content="${_csrf.parameterName}"/>
 <script th:src="@{/js/jquery/jquery-1.11.3.min.js}"></script>
+<script th:src="@{/js/lib/jquery.handle.js}"></script>
+<script th:src="@{/js/lib/ajaxfileupload.js}"></script>
 <link th:href="@{/kindeditor/themes/default/default.css}" />
 <link rel="stylesheet" th:href="@{\bootstrap\css\bootstrap.css}" />
 <link rel="stylesheet" th:href="@{\css\home.css}" />
@@ -108,8 +110,15 @@
 						<!-- 个人信息部分 -->
 						<div class="person-info">
 							<div class="person-header">
-								<img class="img-circle" alt="80x80"
-									src="../images/loginImages/huaidan.jpg" />
+							  <div id="haveHead" th:if="${session.userDto.headPicture}!=null">
+							   <a href="#">
+								<img class="img-circle" alt="80x80" src="../images/loginImages/huaidan.jpg" />
+							   </a>
+							   </div>
+							   <div id="haveHead" th:if="${session.userDto.headPicture}==null">
+							      <input type="file" id="file" name="file"/>
+                                  <button id="start_upload">确定上传</button>
+							   </div>
 							</div>
 							<div class="name text-center" th:text="${user.username}">
 								罗罗罗罗罗罗罗敏</div>
@@ -118,20 +127,20 @@
 									<ul class="list-inline fans">
 										<li><a href="##"><strong th:text="${session.userDto.countFocus}">373</strong><span>关注</span></a></li>
 										<li><a href="##"><strong th:text="${session.userDto.countFans}">151</strong><span>粉丝</span></a></li>
-										<li><a href="##"><strong th:text="${session.userDto.countFocus}">1213</strong><span>微博</span></a></li>
+										<li><a href="##"><strong th:text="${session.userDto.countBlogs}">1213</strong><span>微博</span></a></li>
 									</ul>
 								</div>
 							</div>
 						</div>
 						<div class="right-con">
 							<p>【比赛结果】2:0！Team
-								WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一</p>
+								WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一</p>
 							<p>【比赛结果】2:0！Team
-								WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一</p>
+								WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一</p>
 							<p>【比赛结果】2:0！Team
-								WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一</p>
+								WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一</p>
 							<p>【比赛结果】2:0！Team
-								WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPRL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一</p>
+								WE战胜RoyalNeverGiveup获得联赛收官战的胜利！LPL总战绩4胜6负！最后祝隔壁明天战胜对手获得联赛第一</p>
 						</div>
 					</div>
 				</div>
@@ -140,7 +149,7 @@
 			
 		</div>
 	</div>
-    <div th:fragment="script">
+    <div th:fragment="quoteScript">
        <script th:src="@{/js/lib/date.format.js}"></script>
        <script th:src="@{/kindeditor/kindeditor-all.js}"></script>
        <script th:src="@{/kindeditor/lang/zh-CN.js}"></script>

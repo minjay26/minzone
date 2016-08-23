@@ -1,8 +1,18 @@
 package cn.tendata.minzone.manager.controllers;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
-import org.hibernate.annotations.Parameter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,8 +20,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import cn.tendata.minzone.manager.data.domain.Blog;
+import cn.tendata.minzone.manager.bind.annotation.CurrentUser;
 import cn.tendata.minzone.manager.data.domain.User;
 import cn.tendata.minzone.manager.data.enums.VType;
 import cn.tendata.minzone.manager.service.BlogService;
@@ -24,6 +35,9 @@ public class UserController {
 	private final UserService userService;
 	
 	private  final BlogService blogService;
+	
+	private static final int BUFFER_SIZE = 1 * 1024;
+
 	
 	@Autowired
 	public UserController(UserService userService,BlogService blogService) {
@@ -65,4 +79,11 @@ public class UserController {
 		//map.addAttribute("blogs", blogs);
 		return "/user/visit_user";
 	}
+	
+	@RequestMapping(value="/uploadHead",method=RequestMethod.POST)
+	@ResponseBody
+	public String upload(MultipartFile file,HttpServletRequest request,HttpSession session,HttpServletResponse response,@CurrentUser User user) throws IOException{
+		//response.addHeader("X-Frame-Options", "SAMEORIGIN");
+		return "success";
+}
 }

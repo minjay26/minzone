@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.tendata.minzone.manager.data.domain.Blog;
 import cn.tendata.minzone.manager.data.domain.Comment;
@@ -16,6 +17,7 @@ public class CommentServiceImpl implements CommentService{
     private CommentRepository commentRepository;
     
 	@Override
+	@Transactional(readOnly=true)
 	public List<Comment> getAll(Blog blog) {
 	  List<Comment> comments=this.commentRepository.findByOfBlog(blog);
 		return comments;

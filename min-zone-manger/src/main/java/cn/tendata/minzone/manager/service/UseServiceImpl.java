@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.tendata.minzone.manager.data.domain.User;
 import cn.tendata.minzone.manager.data.dto.UserDto;
@@ -33,6 +34,7 @@ public class UseServiceImpl implements UserService{
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public User findById(Integer id) {
 		return userRepository.findOne(id);
 	}
@@ -44,11 +46,13 @@ public class UseServiceImpl implements UserService{
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public List<User> getAllByType(VType type) {
 	      return this.userRepository.findAllByType(type);
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public UserDto getUserDetail(User user) {
 		long countFan=this.focusRepository.countByBeingFocusUser(user);
 		long countBlog=this.blogRepository.countByBlogUser(user);

@@ -25,8 +25,8 @@ public class Security extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().ignoringAntMatchers("/login/**")
-		        .and().authorizeRequests().anyRequest().permitAll()
-				.and().formLogin().loginPage("/login").defaultSuccessUrl("/home")
+		        .and().authorizeRequests().anyRequest().authenticated()
+				.and().formLogin().loginPage("/login").defaultSuccessUrl("/home").permitAll()
 				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll();
 		
 //		http.csrf().ignoringAntMatchers("/login/**")

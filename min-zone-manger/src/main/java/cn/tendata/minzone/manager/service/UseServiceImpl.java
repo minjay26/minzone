@@ -3,6 +3,8 @@ package cn.tendata.minzone.manager.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +14,7 @@ import cn.tendata.minzone.manager.data.enums.VType;
 import cn.tendata.minzone.manager.repository.BlogRepository;
 import cn.tendata.minzone.manager.repository.FocusRepository;
 import cn.tendata.minzone.manager.repository.UserRepository;
+import cn.tendata.minzone.manager.service.model.SearchKeywordType;
 
 @Service
 public class UseServiceImpl implements UserService{
@@ -61,7 +64,10 @@ public class UseServiceImpl implements UserService{
 		userDto.setCountBlogs(countBlog);
 		userDto.setCountFans(countFan);
 		userDto.setCountFocus(countFocu);
+		userDto.setUsername(user.getUsername());
 		return userDto;
 	}
+	
+
 
 }

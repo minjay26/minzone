@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import cn.tendata.minzone.manager.bind.annotation.CurrentUser;
 import cn.tendata.minzone.manager.data.domain.User;
+import cn.tendata.minzone.manager.data.dto.UserDto;
 import cn.tendata.minzone.manager.data.enums.VType;
 import cn.tendata.minzone.manager.service.BlogService;
 import cn.tendata.minzone.manager.service.UserService;
@@ -36,7 +37,6 @@ public class UserController {
 	
 	private  final BlogService blogService;
 	
-	private static final int BUFFER_SIZE = 1 * 1024;
 
 	
 	@Autowired
@@ -73,17 +73,29 @@ public class UserController {
 	}
 	
 	@RequestMapping("/visit_user/{uId}")
-	public String visitUser(@PathVariable("uId") User user,ModelMap map){
-		//List<Blog> blogs=this.blogService.getAll(user);
-		map.addAttribute("user", user);	
-		//map.addAttribute("blogs", blogs);
+	public String visitUser(@PathVariable("uId") User visitUser,@CurrentUser User user,ModelMap map){
+		UserDto userDto=this.userService.getUserDetail(visitUser);
+		map.addAttribute("userDto", userDto);
+		map.addAttribute("user", user);
+		return "/user/visit_user";
+	}
+	
+	@RequestMapping("/visit_user")
+	public String visitSelf(@CurrentUser User visitUser,ModelMap map){
+		UserDto userDto=this.userService.getUserDetail(visitUser);
+		map.addAttribute("userDto", userDto);
+		map.addAttribute("user", visitUser);
 		return "/user/visit_user";
 	}
 	
 	@RequestMapping(value="/uploadHead",method=RequestMethod.POST)
 	@ResponseBody
 	public String upload(MultipartFile file,HttpServletRequest request,HttpSession session,HttpServletResponse response,@CurrentUser User user) throws IOException{
-		//response.addHeader("X-Frame-Options", "SAMEORIGIN");
 		return "success";
 }
+	@RequestMapping("/visit_user/blogs")
+	public String visitBlog(){
+		
+		return "/user/blogs";
+	}
 }

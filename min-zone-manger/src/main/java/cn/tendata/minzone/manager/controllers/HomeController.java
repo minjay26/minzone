@@ -2,6 +2,7 @@ package cn.tendata.minzone.manager.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class HomeController {
 	
 	private final UserService userService;
 
-	
+
 	@Autowired
 	public HomeController(
 			BlogService blogService,
@@ -38,9 +39,12 @@ public class HomeController {
 		this.blogService = blogService;
 		this.focusTypeService = focusTypeService;
 		this.userService = userService;
-
-
 	}
+
+	
+
+
+
 
 
 
@@ -52,8 +56,9 @@ public class HomeController {
 		map.addAttribute("sumPage", sumPage);
 		map.addAttribute("user", user);
 		session.setAttribute("items", items);
-		session.setAttribute("userDto", userDto);
+		session.setAttribute("userDto", userDto);	
 		return "/home";
+		
 	}
 	
 //	@RequestMapping(value="/{page}",method=RequestMethod.GET)

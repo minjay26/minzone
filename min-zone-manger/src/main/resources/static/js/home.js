@@ -25,6 +25,9 @@ $(function(){
 	
 	$("#submit").click(function(){	
 		 var content= editor.html();
+		 if(content==null||content==""){
+			 alert("微博内容不能为空");
+		 }else{
 			$.ajax({
 				type:"post",
 				url:"/user_blog/submit",
@@ -36,6 +39,7 @@ $(function(){
 					
 				},	
 			})
+		 }
 	})
 	
   $(".glyphicon-thumbs-up").click(function(){
@@ -134,4 +138,5 @@ $("#start_upload").on('click',function(){
     });
 })
 	
+
 })

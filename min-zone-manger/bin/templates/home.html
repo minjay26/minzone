@@ -3,16 +3,15 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="header">
 <meta charset="UTF-8" />
-<meta name="_csrf" th:content="${_csrf.token}"/>
-<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-<meta name="_csrf_name" th:content="${_csrf.parameterName}"/>
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<meta name="_csrf_name" th:content="${_csrf.parameterName}" />
 <script th:src="@{/js/jquery/jquery-1.11.3.min.js}"></script>
-<script th:src="@{/js/lib/jquery.handle.js}"></script>
-<script th:src="@{/js/lib/ajaxfileupload.js}"></script>
 <link th:href="@{/kindeditor/themes/default/default.css}" />
 <link rel="stylesheet" th:href="@{\bootstrap\css\bootstrap.css}" />
 <link rel="stylesheet" th:href="@{\css\home.css}" />
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<link rel="stylesheet" th:href="@{\css\visitUser.css}" />
 </head>
 <body>
 	<div class="container">
@@ -45,7 +44,7 @@
 						<ul class="nav navbar-nav">
 
 							<!-- 用户登陆就显示当前登陆用户 -->
-							<li th:if="${user}"><a href="#"><span
+							<li th:if="${user}"><a href="/user/visit_user"><span
 									class="glyphicon glyphicon-user" aria-hidden="true"
 									th:text="${user.username}">模拟用户</span></a></li>
 
@@ -62,8 +61,7 @@
 									class="glyphicon glyphicon-comment" aria-hidden="true">消息</span></a>
 							</li>
 							<li><a href="/square"><span
-									class="glyphicon glyphicon-flag" aria-hidden="true">广场</span></a>
-							</li>
+									class="glyphicon glyphicon-flag" aria-hidden="true">广场</span></a></li>
 						</ul>
 
 					</div>
@@ -81,7 +79,9 @@
 					<div class="col-md-2 con_nav">
 						<ul class="nav nav-pills nav-stacked">
 							<li role="presentation"><a href="/home">首页</a></li>
-							<li role="presentation"><a th:each="ele : ${session.items}" th:text="${ele.typeDescribe}" th:href="'/user_focus/'+${ele.ftId}">朋友圈</a></li>
+							<li role="presentation"><a th:each="ele : ${session.items}"
+								th:text="${ele.typeDescribe}"
+								th:href="'/user_focus/'+${ele.ftId}">朋友圈</a></li>
 						</ul>
 					</div>
 					<!-- 微博内容部分 -->
@@ -98,10 +98,8 @@
 							</div>
 						</div>
 						<!-- 动态部分 -->
-						<div id="blog_content" th:name="${sumPage}">
-						    
-						</div>
-							
+						<div id="blog_content" th:name="${sumPage}"></div>
+
 						<div id="share"></div>
 						<div class="pagination"></div>
 					</div>
@@ -110,24 +108,27 @@
 						<!-- 个人信息部分 -->
 						<div class="person-info">
 							<div class="person-header">
-							  <div id="haveHead" th:if="${session.userDto.headPicture}!=null">
-							   <a href="#">
-								<img class="img-circle" alt="80x80" src="../images/loginImages/huaidan.jpg" />
-							   </a>
-							   </div>
-							   <div id="haveHead" th:if="${session.userDto.headPicture}==null">
-							      <input type="file" id="file" name="file"/>
-                                  <button id="start_upload">确定上传</button>
-							   </div>
+								<div id="haveHead">
+									<a href="/user/visit_user"> <img class="img-circle" alt="80x80"
+										src="../images/loginImages/huaidan.jpg" />
+									</a>
+								</div>
+								<!-- <div id="noHead" th:if="${session.userDto.headPicture}==null">
+									<input type="file" name="file" id="file" accept="image/*"/>
+                                    <button id="start_upload">开始上传</button>
+								</div> -->
 							</div>
 							<div class="name text-center" th:text="${user.username}">
 								罗罗罗罗罗罗罗敏</div>
 							<div class="row">
 								<div class="col-md-10 col-md-offset-2">
 									<ul class="list-inline fans">
-										<li><a href="##"><strong th:text="${session.userDto.countFocus}">373</strong><span>关注</span></a></li>
-										<li><a href="##"><strong th:text="${session.userDto.countFans}">151</strong><span>粉丝</span></a></li>
-										<li><a href="##"><strong th:text="${session.userDto.countBlogs}">1213</strong><span>微博</span></a></li>
+										<li><a href="##"><strong
+												th:text="${session.userDto.countFocus}">373</strong><span>关注</span></a></li>
+										<li><a href="##"><strong
+												th:text="${session.userDto.countFans}">151</strong><span>粉丝</span></a></li>
+										<li><a href="##"><strong
+												th:text="${session.userDto.countBlogs}">1213</strong><span>微博</span></a></li>
 									</ul>
 								</div>
 							</div>
@@ -146,21 +147,21 @@
 				</div>
 
 			</div>
-			
+
 		</div>
 	</div>
-    <div th:fragment="quoteScript">
-       <script th:src="@{/js/lib/date.format.js}"></script>
-       <script th:src="@{/kindeditor/kindeditor-all.js}"></script>
-       <script th:src="@{/kindeditor/lang/zh-CN.js}"></script>
-       <script th:src="@{/js/base.js}"></script>
-       <script th:src="@{/js/home.js}"></script>
-       <script th:src="@{/js/lib/jqPaginator.js}"></script>
+	<div th:fragment="quoteScript">
+		<script th:src="@{/js/lib/date.format.js}"></script>
+		<script th:src="@{/kindeditor/kindeditor-all.js}"></script>
+		<script th:src="@{/kindeditor/lang/zh-CN.js}"></script>
+		<script th:src="@{/js/base.js}"></script>
+		<script th:src="@{/js/home.js}"></script>
+		<script th:src="@{/js/lib/jqPaginator.js}"></script>
 
-    </div>
+	</div>
 </body>
 <script type="text/javascript">
-    var url="/user_blog/getAllBlog/";
-    loadData(url,1);
+	var url = "/user_blog/getAllBlog/";
+	loadData(url, 1);
 </script>
 </html>

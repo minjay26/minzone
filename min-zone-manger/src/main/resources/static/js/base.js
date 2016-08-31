@@ -17,7 +17,7 @@ var K = window.KindEditor;
 						   html+="<div class='event_con'>"+
 							"<input type='hidden'  value='"+ele.bId+"' />"+
 							"<div>"+
-								"<a href='#'><span>"+ele.blogUser.username+"</span></a>"+
+								"<a href='/user/visit_user/"+ele.blogUser.uId+"'><span>"+ele.blogUser.username+"</span></a>"+
 								"<p>"+ele.content+"</p>"+
 							"</div>"+
 
@@ -52,11 +52,11 @@ var K = window.KindEditor;
 							 html+="<div class='event_con'>"+
 								"<input type='hidden'  value='"+ele.bId+"' />"+
 								"<div>"+
-									"<a href='#'><span>"+ele.blogUser.username+"</span></a>"+
+									"<a href='/user/visit_user/"+ele.blogUser.uId+"'><span>"+ele.blogUser.username+"</span></a>"+
 									"<p>"+ele.content+"</p>"+
 								"</div>"+
                                 "<div>" +
-                                   "<a href='#'><span>"+ele.shareBlog.blogUser.username+"</span></a>"+
+                                   "<a href='/user/visit_user/"+ele.blogUser.uId+"'><span>"+ele.shareBlog.blogUser.username+"</span></a>"+
 									"<p>"+ele.shareBlog.content+"</p>"+
 									"<span>"+new Date(ele.shareBlog.createdDate).format('MM月dd日 hh:mm')+"</span>"+ 
 									"<a href='#' class='pl'>"+

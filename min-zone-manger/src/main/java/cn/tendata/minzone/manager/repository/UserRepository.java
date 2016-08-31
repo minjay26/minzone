@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
 import cn.tendata.minzone.manager.data.domain.User;
 import cn.tendata.minzone.manager.data.enums.VType;
 
-public interface UserRepository extends JpaRepository<User, Integer>{
+public interface UserRepository extends CrudRepository<User, Integer>{
 
 	User findByUsername(String username);
     

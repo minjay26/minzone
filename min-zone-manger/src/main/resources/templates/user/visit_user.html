@@ -1,13 +1,38 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head th:include="home::header">
-<meta charset="UTF-8"/>
-<title>Insert title here</title>
+<meta charset="UTF-8" />
 </head>
 <body>
- <div class="container">
-          <div id="head" th:include="home :: home_head"></div>
-          <input type="text" th:value="${user.username}"/>
-</div>
+	<div class="container" ng-app="app">
+		<div id="head" th:include="home :: home_head"></div>
+		<div>
+			<h3 class="text-center" th:text="${userDto.username}"></h3>
+			 <ul class="text-center list-inline fans">
+					<li style="width:5%;"><a href="##">
+					<strong th:text="${userDto.countFocus}">373</strong><span>关注</span></a></li>
+					<li style="width:5%;"><a href="##">
+					<strong th:text="${userDto.countFans}">151</strong><span>粉丝</span></a></li>
+					<li style="width:5%;"><a href="##">
+					<strong th:text="${userDto.countBlogs}">1213</strong><span>微博</span></a></li>
+			</ul>
+			
+		</div>
+		<div>
+			<ul class="nav nav-tabs nav-justified">
+				<li role="presentation"><a href="#/personInfo">个人资料</a></li>
+				<li role="presentation"><a href="#/user/visit_user/blogs">微博</a></li>
+			</ul>
+		</div>
+		<div ng-view="" id="personInfo"></div>
+	</div>
+	<script th:src="@{/js/lib/angular/angular-1.4.min.js}"></script>
+	<script th:src="@{/js/lib/angular/angular-route.min.js}"></script>
+	<script th:src="@{/js/lib/angular/angular-toggle-switch.min.js}"></script>
+	<script th:src="@{/js/lib/angular/angular-animate.min.js}"></script>
+	<script th:src="@{/js/lib/angular/i18n/angular-locale_zh-cn.js}"></script>
+	<script th:src="@{/js/visitUser.js}"></script>
+	<script th:src="@{/js/personInfo.js}"></script>
 </body>
 </html>

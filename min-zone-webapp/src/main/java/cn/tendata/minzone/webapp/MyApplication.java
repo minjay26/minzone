@@ -13,10 +13,14 @@ import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import cn.tendata.minzone.manager.aspect.ControllerAspect;
 
 
 
@@ -71,4 +75,16 @@ public class MyApplication extends SpringBootServletInitializer{
 //    	        return cmfb;
 //    	    }
 //     }
+     
+     @Configuration
+     @EnableAspectJAutoProxy
+     static class AspectConfig{
+    	 
+     	 @Lazy
+    	 @Bean
+    	 public ControllerAspect controllerAspect(){
+    		 return new ControllerAspect();
+    	 }
+    	 
+     };
 }

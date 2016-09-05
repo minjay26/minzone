@@ -5,10 +5,11 @@
 <meta charset="UTF-8" />
 </head>
 <body>
-	<div class="container" ng-app="app">
+	<div class="container">
 		<div id="head" th:include="home :: home_head"></div>
 		<div>
-			<h3 class="text-center" th:text="${userDto.username}"></h3>
+			<h3 class="text-center" th:text="${userDto.username}"></h3><button type="button" class="btn btn-info">关注</button>
+			<input type="text" th:value="${userDto.isFocus}"/>
 			 <ul class="text-center list-inline fans">
 					<li style="width:5%;"><a href="##">
 					<strong th:text="${userDto.countFocus}">373</strong><span>关注</span></a></li>
@@ -25,14 +26,26 @@
 				<li role="presentation"><a href="#/user/visit_user/blogs">微博</a></li>
 			</ul>
 		</div>
-		<div ng-view="" id="personInfo"></div>
+		<div  id="personInfo">
+		     <div id="info">
+	                               用户名 :<span th:text="${visitUser.username}"></span><br/><br/>
+	                              真实姓名:<span th:if="${visitUser.trueName}" th:text="${visitUser.trueName}"></span>
+	                   <span th:if="${visitUser.trueName==''}">无</span><br/><br/>
+	                             电话号码:<span th:if="${visitUser.phone}" th:text="${visitUser.phone}"></span>
+	                   <span th:if="${visitUser.phone==''}">无</span><br/><br/>
+	                             性别:<span  th:if="${visitUser.gender=='m'}">男</span>
+	                <span  th:if="${visitUser.gender=='f'}">女</span><br/><br/>
+	                            地址:<span th:if="${visitUser.address}" th:text="${visitUser.address}"></span>
+	               <span th:if="${visitUser.address==''}">无</span><br/><br/>
+	                           年龄:<span th:if="${visitUser.age}" th:text="${visitUser.age}"></span>
+	               <span th:if="${visitUser.age==''}">无</span><br/><br/>
+	                           电子邮箱 :<span th:if="${visitUser.email}" th:text="${visitUser.email}"></span>
+	                  <span th:if="${visitUser.email==''}">无</span><br/><br/>
+	                  <input type="hidden" id="id" th:value="${visitUser.uId}"/>
+	         </div>
+	         <div id="blog_content"></div>
+		</div>
 	</div>
-	<script th:src="@{/js/lib/angular/angular-1.4.min.js}"></script>
-	<script th:src="@{/js/lib/angular/angular-route.min.js}"></script>
-	<script th:src="@{/js/lib/angular/angular-toggle-switch.min.js}"></script>
-	<script th:src="@{/js/lib/angular/angular-animate.min.js}"></script>
-	<script th:src="@{/js/lib/angular/i18n/angular-locale_zh-cn.js}"></script>
 	<script th:src="@{/js/visitUser.js}"></script>
-	<script th:src="@{/js/personInfo.js}"></script>
 </body>
 </html>

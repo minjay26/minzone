@@ -1,12 +1,6 @@
 package cn.tendata.minzone.manager.controllers;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -74,17 +68,19 @@ public class UserController {
 	
 	@RequestMapping("/visit_user/{uId}")
 	public String visitUser(@PathVariable("uId") User visitUser,@CurrentUser User user,ModelMap map){
-		UserDto userDto=this.userService.getUserDetail(visitUser);
+		UserDto userDto=this.userService.getUserDetail(user,visitUser);
 		map.addAttribute("userDto", userDto);
 		map.addAttribute("user", user);
+		map.addAttribute("visitUser", visitUser);
 		return "/user/visit_user";
 	}
 	
 	@RequestMapping("/visit_user")
-	public String visitSelf(@CurrentUser User visitUser,ModelMap map){
-		UserDto userDto=this.userService.getUserDetail(visitUser);
+	public String visitSelf(@CurrentUser User user,ModelMap map){
+		UserDto userDto=this.userService.getUserDetail(user);
 		map.addAttribute("userDto", userDto);
-		map.addAttribute("user", visitUser);
+		map.addAttribute("user", user);
+		map.addAttribute("visitUser", user);
 		return "/user/visit_user";
 	}
 	
@@ -92,7 +88,7 @@ public class UserController {
 	@ResponseBody
 	public String upload(MultipartFile file,HttpServletRequest request,HttpSession session,HttpServletResponse response,@CurrentUser User user) throws IOException{
 		return "success";
-}
+    }
 	@RequestMapping("/visit_user/blogs")
 	public String visitBlog(){
 		

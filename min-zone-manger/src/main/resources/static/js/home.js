@@ -90,14 +90,19 @@ $(function(){
 		$parentId.find(".btn-default").click(function(){
 		    var bId=$parentId.children('input').val();
 			var content=commentEditor.html();
+			if(content==null||content==""){
+				alert("请输入评论内容！")
+			}else{
 		   $.ajax({
 			    type:"post",
 			    data:{"content":content},
 			    url:"/user_comment/comment/"+bId,
 			    success:function(){
-			    	getEachBlogComment($parentId,bId)
+			    	getEachBlogComment($parentId,bId);
+			    	commentEditor.html("");
 			    }
 		   })
+			}
 			
 		  })
 	})

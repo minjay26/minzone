@@ -18,7 +18,7 @@ public interface UserService {
 
 	List<User> getAllByType(VType type);
 
-	UserDto getUserDetail(User user);
+	UserDto getUserDetail(User user,User beingFocusUser);
 
-
+	public UserDto getUserDetail(User user);
 }

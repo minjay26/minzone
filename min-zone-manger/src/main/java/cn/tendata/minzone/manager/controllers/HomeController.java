@@ -2,7 +2,6 @@ package cn.tendata.minzone.manager.controllers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import cn.tendata.minzone.manager.data.domain.FocusType;
 import cn.tendata.minzone.manager.data.domain.User;
 import cn.tendata.minzone.manager.data.dto.UserDto;
 import cn.tendata.minzone.manager.service.BlogService;
-import cn.tendata.minzone.manager.service.FocusService;
 import cn.tendata.minzone.manager.service.FocusTypeService;
 import cn.tendata.minzone.manager.service.UserService;
 

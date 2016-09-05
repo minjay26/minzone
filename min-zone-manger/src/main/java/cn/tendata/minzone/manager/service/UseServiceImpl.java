@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.tendata.minzone.manager.data.domain.Focus;
 import cn.tendata.minzone.manager.data.domain.User;
 import cn.tendata.minzone.manager.data.dto.UserDto;
 import cn.tendata.minzone.manager.data.enums.VType;
@@ -54,6 +55,27 @@ public class UseServiceImpl implements UserService{
 	      return this.userRepository.findAllByType(type);
 	}
 
+	@Override
+	@Transactional(readOnly=true)
+	public UserDto getUserDetail(User user,User beingFocusUser) {
+		long countFan=this.focusRepository.countByBeingFocusUser(beingFocusUser);
+		long countBlog=this.blogRepository.countByBlogUser(beingFocusUser);
+		long countFocu=this.focusRepository.countByUser(beingFocusUser);
+		Focus focus=this.focusRepository.findByUserAndBeingFocusUser(user, beingFocusUser);
+		boolean isFocus=false;
+		if (focus==null) {			
+		}else {
+			isFocus=true;
+		}
+		UserDto userDto=new UserDto();
+		userDto.setCountBlogs(countBlog);
+		userDto.setCountFans(countFan);
+		userDto.setCountFocus(countFocu);
+		userDto.setUsername(user.getUsername());
+		userDto.setFocus(isFocus);
+		return userDto;
+	}
+	
 	@Override
 	@Transactional(readOnly=true)
 	public UserDto getUserDetail(User user) {

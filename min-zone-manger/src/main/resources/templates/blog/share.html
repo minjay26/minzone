@@ -14,7 +14,7 @@
 			   <textarea id="share_content" name="share_content"></textarea>
 			   <div id="share_blog_comment" th:each="ele : ${lists}">
 			    <span th:text="${ele.commentUser.username}"></span>
-			    <span th:text="${ele.commentContent}"></span>
+			    <span th:utext="${ele.commentContent}"></span>
 			    <span th:text="${ele.createdDate}"></span>
 			   </div>
 			</div>

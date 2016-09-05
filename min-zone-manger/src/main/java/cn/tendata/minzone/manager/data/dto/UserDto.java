@@ -12,7 +12,7 @@ public class UserDto {
 	
 	private long countBlogs;
 	
-	
+	private boolean isFocus;
 
 	public String getUsername() {
 		return username;
@@ -52,6 +52,14 @@ public class UserDto {
 
 	public void setCountBlogs(long countBlog) {
 		this.countBlogs = countBlog;
+	}
+
+	public boolean isFocus() {
+		return isFocus;
+	}
+
+	public void setFocus(boolean isFocus) {
+		this.isFocus = isFocus;
 	}
 	
 	

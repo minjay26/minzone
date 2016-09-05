@@ -10,5 +10,7 @@ public interface FocusRepository extends JpaRepository<Focus, Integer>{
 	Long countByBeingFocusUser(User user);
 
 	long countByUser(User user);
+	
+	Focus findByUserAndBeingFocusUser(User user,User beingFocusUser);
 
 }
